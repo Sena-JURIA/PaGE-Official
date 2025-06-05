@@ -1,0 +1,239 @@
+body {
+        font-family: 'Segoe UI', 'Meiryo', 'Hiragino Sans', 'Helvetica Neue', Arial, sans-serif; /* Windows寄りのフォントスタック、日本語も考慮 */
+        background-color: #f8f9fa; /* 全体の背景を少し明るいグレーに */
+        color: #212529; /* 基本テキストカラーを濃いグレーに */
+        margin: 0;
+        padding: 0;
+        line-height: 1.7; /* 行間を少し広げる */
+}
+
+#root {
+    /* Reactアプリケーションがここにレンダリングされる想定 */
+}
+
+        header {
+            background-color: #ffffff; /* ヘッダー背景を白に */
+            padding: 15px 50px; /* パディング調整 */
+            color: #0078D4;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* 影をより繊細に */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky; /* ヘッダーを固定 */
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8em; /* 少し小さめに */
+            font-weight: 600; /* 少し太く */
+            color: #0078D4;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: #333333; /* ナビゲーションリンクの色を濃いグレーに */
+            text-decoration: none;
+            font-weight: 500; /* 少し細めに */
+            padding: 8px 0px; /* 下線とのバランス調整 */
+            border-bottom: 2px solid transparent; /* ホバー時の下線用 */
+            transition: color 0.2s ease, border-bottom-color 0.2s ease;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            color: #0078D4; /* ホバー/アクティブ時の色をメインカラーに */
+            border-bottom-color: #0078D4; /* ホバー/アクティブ時に下線を表示 */
+        }
+
+        main {
+            padding: 0; /* main自体のパディングはセクションごとに行う */
+            max-width: 1200px; /* コンテンツ最大幅を広げる */
+            margin: 0 auto; /* 上下マージンはセクションで */
+        }
+
+        .content-section {
+            padding: 60px 50px; /* セクションごとのパディングを統一 */
+        }
+        .content-section:nth-child(even) { /* セクションごとに背景色を変える場合 */
+             /* background-color: #ffffff; */
+        }
+
+
+        /* --- ヒーローセクション --- */
+        .hero-section {
+            background-color: #ffffff; /* ヒーローセクションの背景は白 */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding-top: 80px; /* ヘッダーの高さ分と余白 */
+            padding-bottom: 80px;
+        }
+        .hero-text {
+            flex-basis: 50%;
+        }
+        .hero-text h2 {
+            font-size: 2.8em; /* キャッチコピーを大きく */
+            color: #0078D4; /* メインカラー */
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .hero-text p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #0078D4; /* CTAボタンの背景はメインカラー */
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #005a9e; /* ホバー時少し濃い色 */
+        }
+        .hero-image {
+            flex-basis: 45%;
+            text-align: center;
+        }
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1); /* 画像に少しリッチな影 */
+        }
+
+        /* --- 活動リストセクションのタイトル --- */
+        .section-title {
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 50px;
+            color: #333;
+            font-weight: 600;
+        }
+         .section-title::after { /* タイトル下線装飾 */
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #0078D4;
+            margin: 10px auto 0;
+        }
+
+
+        /* --- 活動カード --- */
+        .activities-list {
+            background-color: #f8f9fa; /* 活動リストの背景は薄いグレー */
+        }
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* レスポンシブなカラム */
+            gap: 30px; /* カード間の隙間 */
+        }
+        .activity-card {
+            background-color: #ffffff;
+            border: 1px solid #e9ecef; /* 境界線を薄く */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06); /* ソフトな影 */
+            overflow: hidden; /* 画像の角丸を適用するため */
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .activity-card img {
+            width: 100%;
+            height: 200px; /* 画像の高さを固定 */
+            object-fit: cover; /* 画像がコンテナに合わせてトリミングされる */
+        }
+        .activity-card-content {
+            padding: 25px;
+            flex-grow: 1; /* 内容が少ない場合でも高さを揃える */
+            display: flex;
+            flex-direction: column;
+        }
+        .activity-card h3 {
+            font-size: 1.4em;
+            color: #0078D4; /* カードタイトルもメインカラー */
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .activity-card p {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: auto; /* 説明文が短い場合に「もっと見る」を下部に固定 */
+            padding-bottom: 15px; /* 「もっと見る」ボタンとの間隔 */
+        }
+        .activity-card .card-link {
+             display: inline-block;
+             color: #0078D4;
+             text-decoration: none;
+             font-weight: 600;
+             margin-top: 15px; /* 説明文の下に配置 */
+             align-self: flex-start; /* 左寄せ */
+        }
+        .activity-card .card-link:hover {
+            text-decoration: underline;
+        }
+
+
+        /* --- リンク集 --- */
+        .links-section {
+            text-align: center; /* Microsoft風サブナビよりは汎用的なリンク集のまま */
+            background-color: #ffffff;
+        }
+        .links-section .section-title { /* リンク集用のタイトル調整 */
+            margin-bottom: 30px;
+        }
+        .links-section a {
+            display: inline-block;
+            margin: 8px 12px;
+            color: #0078D4;
+            background-color: transparent;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border: 1px solid #0078D4; /* 枠線ボタン */
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .links-section a:hover {
+            background-color: #0078D4;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 50px;
+            background-color: #343a40; /* フッター背景を濃いグレーに */
+            color: #adb5bd; /* フッターテキストを明るいグレーに */
+            font-size: 0.9em;
+        }
+footer p {
+    margin: 0;
+}
+
+footer a {
+    color: #adb5bd; /* フッターリンクを明るいグレーに */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}

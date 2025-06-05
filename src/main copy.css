@@ -1,0 +1,398 @@
+body {
+        font-family: 'Segoe UI', 'Meiryo', 'Hiragino Sans', 'Helvetica Neue', Arial, sans-serif; /* Windows寄りのフォントスタック、日本語も考慮 */
+        background-color: #f8f9fa; /* 全体の背景を少し明るいグレーに */
+        color: #212529; /* 基本テキストカラーを濃いグレーに */
+        margin: 0;
+        padding: 0;
+        line-height: 1.7; /* 行間を少し広げる */
+}
+
+#root {
+    /* Reactアプリケーションがここにレンダリングされる想定 */
+}
+
+        header {
+            background-color: #ffffff; /* ヘッダー背景を白に */
+            padding: 15px 50px; /* パディング調整 */
+            color: #0078D4;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* 影をより繊細に */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky; /* ヘッダーを固定 */
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8em; /* 少し小さめに */
+            font-weight: 600; /* 少し太く */
+            color: #0078D4;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: #333333; /* ナビゲーションリンクの色を濃いグレーに */
+            text-decoration: none;
+            font-weight: 500; /* 少し細めに */
+            padding: 8px 0px; /* 下線とのバランス調整 */
+            border-bottom: 2px solid transparent; /* ホバー時の下線用 */
+            transition: color 0.2s ease, border-bottom-color 0.2s ease;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            color: #0078D4; /* ホバー/アクティブ時の色をメインカラーに */
+            border-bottom-color: #0078D4; /* ホバー/アクティブ時に下線を表示 */
+        }
+
+        main {
+            padding: 0; /* main自体のパディングはセクションごとに行う */
+            max-width: 1200px; /* コンテンツ最大幅を広げる */
+            margin: 0 auto; /* 上下マージンはセクションで */
+        }
+
+        .content-section {
+            padding: 60px 50px; /* セクションごとのパディングを統一 */
+        }
+        .content-section:nth-child(even) { /* セクションごとに背景色を変える場合 */
+             /* background-color: #ffffff; */
+        }
+
+
+        /* --- ヒーローセクション --- */
+        .hero-section {
+            background-color: #ffffff; /* ヒーローセクションの背景は白 */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding-top: 80px; /* ヘッダーの高さ分と余白 */
+            padding-bottom: 80px;
+        }
+        .hero-text {
+            flex-basis: 50%;
+        }
+        .hero-text h2 {
+            font-size: 2.8em; /* キャッチコピーを大きく */
+            color: #0078D4; /* メインカラー */
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .hero-text p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #0078D4; /* CTAボタンの背景はメインカラー */
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #005a9e; /* ホバー時少し濃い色 */
+        }
+        .hero-image {
+            flex-basis: 45%;
+            text-align: center;
+        }
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1); /* 画像に少しリッチな影 */
+        }
+
+        /* --- 活動リストセクションのタイトル --- */
+        .section-title {
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 50px;
+            color: #333;
+            font-weight: 600;
+        }
+         .section-title::after { /* タイトル下線装飾 */
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #0078D4;
+            margin: 10px auto 0;
+        }
+
+
+        /* --- 活動カード --- */
+        .activities-list {
+            background-color: #f8f9fa; /* 活動リストの背景は薄いグレー */
+        }
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* レスポンシブなカラム */
+            gap: 30px; /* カード間の隙間 */
+        }
+        .activity-card {
+            background-color: #ffffff;
+            border: 1px solid #e9ecef; /* 境界線を薄く */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06); /* ソフトな影 */
+            overflow: hidden; /* 画像の角丸を適用するため */
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .activity-card img {
+            width: 100%;
+            height: 200px; /* 画像の高さを固定 */
+            object-fit: cover; /* 画像がコンテナに合わせてトリミングされる */
+        }
+        .activity-card-content {
+            padding: 25px;
+            flex-grow: 1; /* 内容が少ない場合でも高さを揃える */
+            display: flex;
+            flex-direction: column;
+        }
+        .activity-card h3 {
+            font-size: 1.4em;
+            color: #0078D4; /* カードタイトルもメインカラー */
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .activity-card p {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: auto; /* 説明文が短い場合に「もっと見る」を下部に固定 */
+            padding-bottom: 15px; /* 「もっと見る」ボタンとの間隔 */
+        }
+        .activity-card .card-link {
+             display: inline-block;
+             color: #0078D4;
+             text-decoration: none;
+             font-weight: 600;
+             margin-top: 15px; /* 説明文の下に配置 */
+             align-self: flex-start; /* 左寄せ */
+        }
+        .activity-card .card-link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- 参加勧誘セクション (Join Us Section) --- */
+.join-us-section {
+    background-color: #eaf6ff; /* 明るい水色系の背景で少し目立たせる */
+    text-align: center; /* 基本的に内容を中央揃え */
+    padding-top: 70px; /* 上下のパディング */
+    padding-bottom: 70px;
+}
+
+/*
+   既存の .content-section に padding: 60px 50px; がある場合、
+   .join-us-section の padding-left と padding-right は不要になるか、
+   0 に上書きする必要があるかもしれません。
+   その場合は以下のように調整してください。
+   .join-us-section {
+       padding-left: 0;
+       padding-right: 0;
+   }
+*/
+
+.join-us-section .container { /* 幅を制限し中央に配置するためのコンテナ */
+    max-width: 800px; /* コンテンツの最大幅 */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px; /* コンテナ左右のパディング (スマホ表示時など考慮) */
+}
+
+.join-us-section .section-title {
+    /* 既存の .section-title のスタイルを継承しつつ、必要なら調整 */
+    margin-bottom: 25px; /* 通常のタイトルより少しメッセージとの間隔を調整 */
+    color: #005a9e; /* 少し濃いめの青、またはメインカラー #0078D4 */
+}
+/* .join-us-section .section-title::after のスタイルは既存のものを流用 */
+
+
+.join-us-message {
+    font-size: 1.1em; /* メッセージのフォントサイズ */
+    color: #333; /* メッセージのテキストカラー */
+    line-height: 1.8; /* 行間 */
+    margin-bottom: 35px;
+}
+
+.join-us-details {
+    background-color: #ffffff; /* 詳細部分は白い背景で区別 */
+    padding: 25px 30px; /* 詳細部分の内部パディング */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07); /* ソフトな影 */
+    margin-bottom: 35px;
+    text-align: left; /* 詳細部分は左揃えに戻す */
+}
+
+.join-us-details p strong {
+    font-size: 1.15em; /* 「こんな方、特に歓迎します！」の文字サイズ */
+    color: #0078D4; /* 強調部分もメインカラーで */
+    display: block;
+    margin-bottom: 15px;
+}
+
+.join-us-details ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.join-us-details ul li {
+    font-size: 1em;
+    color: #444;
+    padding: 10px 0; /* リスト項目の上下パディング */
+    padding-left: 30px; /* アイコン用のスペース */
+    position: relative;
+    border-bottom: 1px dashed #e8e8e8; /* リスト項目間の薄い区切り線 */
+}
+.join-us-details ul li:last-child {
+    border-bottom: none; /* 最後のリスト項目の下線はなし */
+}
+
+.join-us-details ul li::before { /* 簡単なリストマーカーアイコン */
+    content: '✔'; /* 例: チェックマーク (好みで変更: '💡', '✨', '🚀' など) */
+    color: #0078D4; /* アイコンの色 */
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%); /* アイコンを垂直方向に中央揃え */
+    font-weight: bold;
+    font-size: 1.1em; /* アイコンサイズ調整 */
+}
+
+/* 参加勧誘セクション内のCTAボタンのスタイル */
+.join-us-section .cta-button {
+    /* 既存の .cta-button スタイルを基本的に継承 */
+    /* 必要であれば、このセクション専用のスタイルを上書き */
+    padding: 14px 35px; /* 少し大きめに */
+    font-size: 1.05em; /* フォントサイズも少し調整 */
+    /* background-color: #005a9e; /* 色を変える場合 */
+    /* color: white; */
+}
+/*
+.join-us-section .cta-button:hover {
+    background-color: #004578; /* ホバー時の色を変える場合 */
+/*}*/
+
+
+        /* --- リンク集 --- */
+        .links-section {
+            text-align: center; /* Microsoft風サブナビよりは汎用的なリンク集のまま */
+            background-color: #ffffff;
+        }
+        .links-section .section-title { /* リンク集用のタイトル調整 */
+            margin-bottom: 30px;
+        }
+        .links-section a {
+            display: inline-block;
+            margin: 8px 12px;
+            color: #0078D4;
+            background-color: transparent;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border: 1px solid #0078D4; /* 枠線ボタン */
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .links-section a:hover {
+            background-color: #0078D4;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 50px;
+            background-color: #343a40; /* フッター背景を濃いグレーに */
+            color: #adb5bd; /* フッターテキストを明るいグレーに */
+            font-size: 0.9em;
+        }
+footer p {
+    margin: 0;
+}
+
+footer a {
+    color: #adb5bd; /* フッターリンクを明るいグレーに */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+/* --- Footer --- */
+footer {
+    /* text-align: center; /* 全体を中央揃えにしていた場合は、セクション内で上書きするので削除またはコメントアウトも検討 */
+    padding: 40px 50px; /* 上下のパディングを適切に設定 */
+    background-color: #343a40; /* 既存の背景色 */
+    color: #adb5bd; /* 既存の文字色 */
+    font-size: 0.9em; /* 既存のフォントサイズ */
+
+    /* フッターをFlexコンテナにして、中の要素 (section や p) を制御 */
+    display: flex;
+    flex-wrap: wrap; /* 子要素が幅を超える場合に折り返す */
+    justify-content: flex-start;
+    gap: 35px; /* 各要素（セクションやコピーライト）間の最小の隙間 */
+}
+
+/* フッター内の各リンクセクション (<section>) */
+footer > section {
+    /* flex-grow: 1; 各セクションが利用可能なスペースを均等に分け合う場合 */
+    /* flex-shrink: 0; 縮まないようにする場合 */
+    flex-basis: 250px; /* 各セクションの基本的な幅。コンテンツ量や列の数に応じて調整 */
+    min-width: 200px;  /* 各セクションの最小幅 */
+    padding: 0 25px; /* 各セクションの左右の内部余白 */
+    text-align: left; /* セクション内のテキストは左揃えに */
+}
+
+/* (オプション) 各リンクセクションに見出しをつけたい場合 (例: <h4>PaGEについて</h4>) */
+footer > section h4 {
+    color: #ffffff;
+    font-size: 1.1em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* フッター内のリンク (<a class="footer-link">) */
+.footer-link {
+    display: block; /* これでリンクが縦に並ぶ */
+    color: #adb5bd; /* 既存の色 */
+    text-decoration: none;
+    margin-bottom: 10px; /* 各リンク間の垂直方向のスペース */
+    padding: 5px 0; /* 上下のパディングで見栄え調整 */
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.footer-link:hover {
+    color: #ffffff; /* ホバー時に白く */
+    /* text-decoration: underline; /* 好みで下線を追加 */
+    padding-left: 5px; /* ホバー時に少し左にインデントするなどの効果 */
+}
+
+/* コピーライトの段落 (<p>) */
+footer > p {
+    flex-basis: 100%; /* 幅全体を使って、リンクセクションの下に回り込ませる */
+    text-align: center; /* コピーライトは中央揃え */
+    margin-top: 40px; /* 上のリンクセクション群との間に十分なスペース */
+    padding-top: 20px; /* コピーライト表示部分の上のパディング */
+    border-top: 1px solid #495057; /* 上に区切り線 */
+}
