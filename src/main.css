@@ -221,20 +221,21 @@ main {
 
         .carousel-dots {
             position: absolute;
-            bottom: 20px; /* キャプションと被らないように調整 */
+            bottom: 35px; /* キャプションと被らないように調整 */
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 8px;
+            gap: 16px;
             z-index: 10;
         }
         .carousel-dots .dot {
-            width: 10px;
-            height: 10px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.5);
             cursor: pointer;
             transition: background-color 0.3s ease;
+            order: 2px solid #fff;
         }
         .carousel-dots .dot.active {
             background-color: rgba(255, 255, 255, 1);
