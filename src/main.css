@@ -103,8 +103,8 @@ nav ul li a.active {
 
 main {
     padding: 0;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;         
+    margin: 0;           
 }
 
 .content-section {
@@ -128,10 +128,9 @@ main {
         .hero-carousel {
             position: relative;
             width: 100%;
-            max-width: 1200px; /* mainのmax-widthと合わせるか、セクション内で調整 */
-            margin: 0 auto;
+            margin: 0;
             overflow: hidden;
-            border-radius: 8px; /* カルーセル全体に角丸 */
+            border-radius: 8px;
             box-shadow: var(--shadow-strong, 0 8px 25px rgba(0, 30, 80, 0.08));
         }
 
@@ -235,7 +234,11 @@ main {
             background-color: rgba(255, 255, 255, 0.5);
             cursor: pointer;
             transition: background-color 0.3s ease;
-            order: 2px solid #fff;
+            border: 2px solid #fff;
+            padding: 0;         /* 追加: デフォルトの余白を消す */
+            outline: none;      /* 追加: フォーカス枠を消す（必要なら） */
+            box-sizing: border-box; /* 追加: 枠線込みでサイズを維持 */
+            display: inline-block;  /* 追加: インラインブロックで正円を維持 */
         }
         .carousel-dots .dot.active {
             background-color: rgba(255, 255, 255, 1);
@@ -267,7 +270,7 @@ main {
 .section-title {
     /* font-family: 'Montserrat', sans-serif; */
     text-align: center;
-    font-size: 2.2em;
+    font-size: clamp(1.1em, 4vw, 2.2em);
     margin-bottom: 50px;
     color: var(--color-text-accent);
     font-weight: 700;
@@ -488,4 +491,102 @@ footer > p { /* コピーライト */
     padding-top: 20px;
     border-top: 1px solid var(--color-border-footer);
     color: var(--color-text-footer-copyright);
+}
+
+/* --- スプラッシュオーバーレイ --- */
+.splash-overlay {
+  position: fixed;
+  z-index: 2000;
+  inset: 0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity 0.8s cubic-bezier(.4,0,.2,1);
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 24px;
+  overflow: auto;
+}
+
+@keyframes splash-fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.splash-overlay.hide {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s cubic-bezier(.4,0,.2,1);
+}
+
+.cta-button {
+  padding: clamp(6px, 2vw, 12px) clamp(12px, 4vw, 24px);
+}
+
+@media (max-width: 600px) {
+  .splash-title {
+    font-size: 1.3rem;
+    max-width: 98vw;
+  }
+  .cta-button,
+  .slide-caption .cta-button.slide-cta {
+    font-size: clamp(0.8em, 2.5vw, 1em);
+    padding: 6px 12px;
+  }
+  .section-title {
+    font-size: 1.3em;
+  }
+  header h1 {
+    font-size: 1.2em;
+  }
+  .hero-section .carousel-slide img {
+    max-height: 300px;   /* 画像を大きめに表示 */
+    min-height: 180px;   /* 必要なら最小高さも指定 */
+  }
+  .hero-section .slide-caption {
+    padding: 24px 12px;  /* キャプションの余白を広げる */
+  }
+  .hero-section .slide-caption h3 {
+    font-size: 1.3rem;   /* タイトルを大きく */
+  }
+  .hero-section .slide-caption p {
+    font-size: 1.05rem;  /* 説明文も少し大きく */
+  }
+  .hero-section .cta-button,
+  .hero-section .slide-cta {
+    font-size: 1.1rem;   /* ボタンも大きく */
+    padding: 12px 24px;
+  }
+}
+
+.hero-section .slide-caption h3 {
+  font-size: clamp(1.1rem, 4vw, 2rem);
+}
+.hero-section .slide-caption p {
+  font-size: clamp(0.9rem, 3vw, 1.2rem);
+}
+.hero-section .cta-button,
+.hero-section .slide-cta {
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  padding: clamp(6px, 2vw, 12px) clamp(12px, 4vw, 24px);
+}
+
+.splash-title {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: bold;
+  color: #34495E;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin: 0;
+  line-height: 1.1;
+  opacity: 0;
+  animation: splash-title-fadein 1s cubic-bezier(.4,0,.2,1) 0.2s forwards;
+}
+
+@keyframes splash-title-fadein {
+  from { opacity: 0; transform: translateY(30px) scale(0.95);}
+  to   { opacity: 1; transform: translateY(0) scale(1);}
 }
