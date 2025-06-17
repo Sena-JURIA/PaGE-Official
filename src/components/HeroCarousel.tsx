@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const slides = [
   {
@@ -23,17 +23,50 @@ const slides = [
 
 export default function HeroCarousel() {
   const [current, setCurrent] = useState(0);
+  const [isZooming, setIsZooming] = useState(true);
 
   const goTo = (idx: number) => setCurrent(idx);
   const prev = () => setCurrent((current - 1 + slides.length) % slides.length);
   const next = () => setCurrent((current + 1) % slides.length);
 
+  // スライド切り替え時にアニメーション中フラグを立てる
+  useEffect(() => {
+    setIsZooming(true);
+    const timer = setTimeout(() => setIsZooming(false), 5000); // 5秒間overflow: hidden
+    return () => clearTimeout(timer);
+  }, [current]);
+
   return (
     <div className="hero-carousel">
-      <div className="carousel-slides-container" style={{ transform: `translateX(-${current * 100}%)`, display: "flex", transition: "transform 0.5s" }}>
+      <div
+        className="carousel-slides-container"
+        style={{
+          transform: `translateX(-${current * 100}%)`,
+          display: "flex",
+          transition: "transform 0.5s"
+        }}
+      >
         {slides.map((slide, idx) => (
-          <div className="carousel-slide" key={idx} style={{ minWidth: "100%" }}>
-            <img src={slide.img} alt={slide.title} />
+          <div
+            className="carousel-slide"
+            key={idx}
+            style={{
+              minWidth: "100%",
+              height: "60vh",
+              overflow: isZooming && current === idx ? "hidden" : "auto"
+            }}
+          >
+            <img
+              key={current === idx ? `active-${idx}` : `inactive-${idx}`}
+              src={slide.img}
+              alt={slide.title}
+              className="hero-zoom-img"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover"
+              }}
+            />
             <div className="slide-caption">
               <h3>{slide.title}</h3>
               <p>{slide.desc}</p>
@@ -57,31 +90,3 @@ export default function HeroCarousel() {
     </div>
   );
 }
-
-// CSS styles
-const styles = `
-.splash-overlay {
-  position: fixed;
-  z-index: 2000;
-  inset: 0;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 1;
-  pointer-events: all;
-  transition: opacity 0.8s cubic-bezier(.4,0,.2,1);
-}
-
-.splash-overlay.hide {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.8s cubic-bezier(.4,0,.2,1);
-}
-`;
-
-// Inject styles into the document
-const styleSheet = document.createElement("style");
-styleSheet.type = "text/css";
-styleSheet.innerText = styles;
-document.head.appendChild(styleSheet);

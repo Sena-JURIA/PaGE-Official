@@ -32,7 +32,10 @@ function App() {
 
         <main>
           {/* <script src="src/main.js"></script> ←不要 */}
-          <section id="hero" className="hero-section content-section">
+          <section
+            id="hero"
+            className="hero-section content-section"
+          >
             <HeroCarousel />
           </section>
 

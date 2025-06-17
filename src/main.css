@@ -122,7 +122,7 @@ main {
             padding-top: 40px; /* カルーセルのため少し調整 */
             padding-bottom: 40px; /* カルーセルのため少し調整 */
             background-color: var(--color-background-light, #FFFFFF); /* CSS変数またはデフォルト白 */
-            /* 元のflex関連のスタイルはカルーセル構造に合わせて不要になるか、hero-carousel側で制御 */
+            /* 元のflex関連のスタイルはカルーセル構造に合わせて不要になるか、hero-carousel側で制御 */ /* 追加: ヒーローセクションの縦幅を拡大 */
         }
 
         .hero-carousel {
@@ -132,6 +132,7 @@ main {
             overflow: hidden;
             border-radius: 8px;
             box-shadow: var(--shadow-strong, 0 8px 25px rgba(0, 30, 80, 0.08));
+
         }
 
         .carousel-slides-container {
@@ -143,13 +144,15 @@ main {
             min-width: 100%;
             position: relative;
             box-sizing: border-box;
+            height: 60vh; /* 追加: スライドの縦幅を大きく */
+            overflow: visible; /* 変更: 拡大時に画像が見切れないように */
         }
 
         .carousel-slide img {
             width: 100%;
-            height: auto; /* 高さを画像のアスペクト比に合わせる */
-            max-height: 500px; /* 最大高さを設定 (任意) */
-            object-fit: cover; /* コンテナに合わせて画像を調整 */
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover; /* コンテナに合わせて画像を調整（見切れOK） */
             display: block;
         }
 
@@ -543,7 +546,6 @@ footer > p { /* コピーライト */
     font-size: 1.2em;
   }
   .hero-section .carousel-slide img {
-    max-height: 300px;   /* 画像を大きめに表示 */
     min-height: 180px;   /* 必要なら最小高さも指定 */
   }
   .hero-section .slide-caption {
@@ -589,4 +591,19 @@ footer > p { /* コピーライト */
 @keyframes splash-title-fadein {
   from { opacity: 0; transform: translateY(30px) scale(0.95);}
   to   { opacity: 1; transform: translateY(0) scale(1);}
+}
+
+@keyframes hero-zoom {
+  0%   { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.hero-zoom-img {
+  animation: hero-zoom 5s forwards 1;
+  /* 既存のobject-fit, width, heightはそのまま */
+}
+
+/* アニメーション中はスクロールバー非表示（最新ブラウザのみ対応） */
+.carousel-slide:has(.hero-zoom-img[style*="animation"]) {
+  overflow: hidden !important;
 }
