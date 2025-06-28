@@ -36,6 +36,14 @@
     --shadow-cta-hover: 0 4px 8px rgba(0,0,0,0.15);
 }
 
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
 body {
     font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
     background-color: var(--color-background-body);
@@ -145,7 +153,7 @@ main {
             position: relative;
             box-sizing: border-box;
             height: 60vh; /* 追加: スライドの縦幅を大きく */
-            overflow: visible; /* 変更: 拡大時に画像が見切れないように */
+            overflow: hidden; /* 変更: 拡大時に画像が見切れないように */
         }
 
         .carousel-slide img {
@@ -294,8 +302,22 @@ main {
 }
 .cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr); /* デフォルトは3カラム */
     gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 960px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr); /* 2カラム */
+  }
+}
+
+@media (max-width: 640px) {
+  .cards-container {
+    grid-template-columns: 1fr; /* 1カラム */
+  }
 }
 .activity-card {
     background-color: var(--color-background-light);
@@ -529,7 +551,15 @@ footer > p { /* コピーライト */
   padding: clamp(6px, 2vw, 12px) clamp(12px, 4vw, 24px);
 }
 
+
+
 @media (max-width: 600px) {
+  header {
+    padding: 15px 20px; /* 左右のパディングを調整 */
+  }
+  .content-section {
+    padding: 40px 20px; /* 左右のパディングを調整 */
+  }
   .splash-title {
     font-size: 1.3rem;
     max-width: 98vw;

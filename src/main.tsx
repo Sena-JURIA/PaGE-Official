@@ -1,10 +1,15 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import React, { useEffect, useState } from "react";
-import './index.css'
-import HeroCarousel from "./components/HeroCarousel";
 
-function App() {
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './index.css';
+import HeroCarousel from "./components/HeroCarousel";
+import BlogList from './components/BlogList';
+import BlogPostPage from './pages/blog/BlogPostPage';
+import BlogLayout from './pages/blog/BlogLayout'; // Import the new BlogLayout
+
+function Home() {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
@@ -22,8 +27,9 @@ function App() {
           <h1>PaGE</h1>
           <nav>
             <ul>
-              <li><a href="#hero" className="active">ホーム</a></li>
+              <li><a href="/" className="active">ホーム</a></li>
               <li><a href="#activities">活動内容</a></li>
+              <li><a href="/blog">ブログ</a></li>
               <li><a href="#links">リンク</a></li>
               <li><a href="#">その他</a></li>
             </ul>
@@ -31,7 +37,6 @@ function App() {
         </header>
 
         <main>
-          {/* <script src="src/main.js"></script> ←不要 */}
           <section
             id="hero"
             className="hero-section content-section"
@@ -101,7 +106,7 @@ function App() {
           <section id="links" className="content-section links-section">
             <h2 className="section-title">関連リンク</h2>
             <a href="#">GitHub</a>
-            <a href="#">ブログ記事</a>
+            <a href="/blog">ブログ記事</a>
             <a href="https://x.com/WearePaGE0125">X (旧Twitter)</a>
             <a href="#">作品ポートフォリオ</a>
           </section>
@@ -111,7 +116,7 @@ function App() {
           <section>
             <h4>リンク</h4>
             <a href="#" className="footer-link">About Us</a>
-            <a href="#" className="footer-link">ブログ記事</a>
+            <a href="/blog" className="footer-link">ブログ記事</a>
             <a href="https://x.com/WearePaGE0125" className="footer-link">X (旧Twitter)</a>
             <a href="#" className="footer-link">作品ポートフォリオ</a>
           </section>
@@ -138,6 +143,16 @@ function App() {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/blog" element={<BlogLayout />}>
+          <Route index element={<BlogList />} />
+          <Route path=":postId" element={<BlogPostPage />} />
+          <Route path="tags/:tagName" element={<BlogList />} />
+        </Route>
+      </Routes>
+    </Router>
   </StrictMode>,
 );
+

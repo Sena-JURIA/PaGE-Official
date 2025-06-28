@@ -1,0 +1,73 @@
+
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { getPosts } from '../../data/blogPosts';
+import type { Post } from '../../types/Post';
+import './BlogPostPage.css';
+
+const BlogPostPage: React.FC = () => {
+  const { postId } = useParams<{ postId: string }>();
+  const [post, setPost] = useState<Post | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      const posts = await getPosts();
+      const foundPost = posts.find(p => p.id === postId);
+      setPost(foundPost || null);
+      setLoading(false);
+    };
+
+    fetchPost();
+  }, [postId]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!post) {
+    return <div className="post-not-found">記事が見つかりませんでした。</div>;
+  }
+
+  return (
+    <div className="blog-post-page">
+      <div className="post-hero">
+        <div className="post-hero-text">
+          <h1 className="post-title">{post.title}</h1>
+          <p className="post-meta">
+            <span className="post-author">{post.author.name}</span>
+            <span className="post-date">{post.date}</span>
+          </p>
+          <div className="post-tags">
+            {post.tags.map(tag => (
+              <Link to={`/blog/tags/${tag}`} key={tag} className="tag">
+                {tag}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="post-body">
+        <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }} />
+        
+        <div className="author-profile-box">
+          <div className="author-avatar">
+            <img src={post.author.avatarUrl} alt={`${post.author.name}のアバター`} />
+          </div>
+          <div className="author-details">
+            <h3 className="author-name">{post.author.name}</h3>
+            <p className="author-bio">{post.author.bio}</p>
+            {post.author.xUrl && (
+              <a href={post.author.xUrl} target="_blank" rel="noopener noreferrer" className="author-social-link">
+                Xでフォロー
+              </a>
+            )}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+export default BlogPostPage;

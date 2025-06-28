@@ -1,0 +1,108 @@
+.blog-layout {
+  /*display: grid;*/
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  background-color: var(--color-background-body);
+}
+
+.blog-header {
+  background-color: var(--color-background-light);
+  padding: 15px 50px;
+  box-shadow: var(--shadow-soft);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.blog-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blog-header h1 {
+  font-size: 1.9em;
+  font-weight: 700;
+  color: var(--color-text-accent);
+  margin: 0;
+}
+
+.blog-header nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.blog-header nav ul li {
+  margin-left: 30px;
+}
+
+.blog-header nav ul li a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 0px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-bottom-color 0.2s ease;
+}
+
+.blog-header nav ul li a:hover,
+.blog-header nav ul li a.active {
+  color: var(--color-text-accent);
+  border-bottom-color: var(--color-border-primary);
+}
+
+.blog-main-content {
+  /* パディングは内部のコンテンツ（.blog-post-pageなど）で管理 */
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.blog-footer {
+  background-color: var(--color-background-footer);
+  color: var(--color-text-footer-copyright);
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .blog-header {
+    padding: 10px 20px;
+  }
+
+  .blog-header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .blog-header nav ul {
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .blog-header nav ul li {
+    margin-left: 0;
+    margin-bottom: 5px;
+  }
+
+  .blog-main-content {
+    padding: 0 15px;
+  }
+}
+
+.blog-list-section {
+  padding: 60px 0;
+}
+
+@media (max-width: 768px) {
+  .blog-list-section {
+    padding: 30px 0;
+  }
+}
