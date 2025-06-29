@@ -62,6 +62,10 @@ const BlogPostPage: React.FC = () => {
                 Xでフォロー
               </a>
             )}
+            {' '}
+            <Link to={`/blog/authors/${post.author.id}`} className="author-posts-link">
+              この人の記事を読む
+            </Link>
           </div>
         </div>
 

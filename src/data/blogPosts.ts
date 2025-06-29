@@ -1,5 +1,14 @@
 import fm from 'front-matter';
 import { marked } from 'marked';
+import hljs from 'highlight.js';
+
+marked.setOptions({
+  highlight: function(code: string, lang: string) {
+    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+    return hljs.highlight(code, { language }).value;
+  },
+  langPrefix: 'hljs language-', // highlight.js css expects a language prefix
+} as any);
 
 import type { Post } from '../types/Post';
 import { authors } from './authors';
@@ -22,6 +31,7 @@ export async function getPosts(): Promise<Post[]> {
       const rawContent = await loader();
       const { attributes, body } = fm<FrontMatterAttributes>(rawContent);
       const htmlContent = marked(body) as string;
+      console.log("Generated HTML for post:", htmlContent); // デバッグ用
       const author = authors[attributes.authorId];
 
       if (!author) {

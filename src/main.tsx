@@ -11,6 +11,7 @@ import BlogLayout from './pages/blog/BlogLayout'; // Import the new BlogLayout
 
 function Home() {
   const [showSplash, setShowSplash] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowSplash(false), 1500);
@@ -24,8 +25,19 @@ function Home() {
       </div>
       <div className={`main-content${showSplash ? " hidden" : ""}`}>
         <header>
-          <h1>PaGE</h1>
-          <nav>
+          <a href="/"><h1>PaGE</h1></a>
+          <button 
+            className="menu-toggle" 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-expanded={isMenuOpen}
+            aria-controls="main-nav"
+          >
+            <span className="sr-only">メニューを開閉</span>
+            <span className="hamburger-bar"></span>
+            <span className="hamburger-bar"></span>
+            <span className="hamburger-bar"></span>
+          </button>
+          <nav id="main-nav" className={`mobile-nav ${isMenuOpen ? 'is-open' : ''}`}>
             <ul>
               <li><a href="/" className="active">ホーム</a></li>
               <li><a href="#activities">活動内容</a></li>
@@ -150,6 +162,7 @@ createRoot(document.getElementById('root')!).render(
           <Route index element={<BlogList />} />
           <Route path=":postId" element={<BlogPostPage />} />
           <Route path="tags/:tagName" element={<BlogList />} />
+          <Route path="authors/:authorId" element={<BlogList />} />
         </Route>
       </Routes>
     </Router>

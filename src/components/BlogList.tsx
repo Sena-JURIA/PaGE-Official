@@ -14,7 +14,7 @@ const BlogList: React.FC = () => {
   const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
   const [allTags, setAllTags] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
-  const { tagName } = useParams<{ tagName?: string }>();
+  const { tagName, authorId } = useParams<{ tagName?: string; authorId?: string }>();
 
   useEffect(() => {
     const fetchPostsAndTags = async () => {
@@ -31,22 +31,33 @@ const BlogList: React.FC = () => {
 
   useEffect(() => {
     if (!loading) {
+      let posts = allPosts;
       if (tagName) {
-        setFilteredPosts(allPosts.filter(p => p.tags.includes(tagName)));
-      } else {
-        setFilteredPosts(allPosts);
+        posts = posts.filter(p => p.tags.includes(tagName));
+      } else if (authorId) {
+        posts = posts.filter(p => p.author.id === authorId);
       }
+      setFilteredPosts(posts);
     }
-  }, [tagName, allPosts, loading]);
+  }, [tagName, authorId, allPosts, loading]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
+  const getTitle = () => {
+    if (tagName) return `タグ: ${tagName}`;
+    if (authorId) {
+      const authorName = allPosts.find(p => p.author.id === authorId)?.author.name;
+      return authorName ? `著者: ${authorName}` : '最新ブログ記事';
+    }
+    return '最新ブログ記事';
+  };
+
   return (
     <section id="blog" className="content-section">
-      <div className="blog-header">
-        <h2 className="section-title">{tagName ? `タグ: ${tagName}` : '最新ブログ記事'}</h2>
+      <div >
+        <h2 className="section-title">{getTitle()}</h2>
         {/*
         <div className="tags-cloud">
           <a href="/blog" className={!tagName ? 'active' : ''}>すべての記事</a>
@@ -68,7 +79,7 @@ const BlogList: React.FC = () => {
             <BlogCard key={post.id} post={post} />
           ))
         ) : (
-          <p>このタグの記事はありません。</p>
+          <p>この記事はありません。</p>
         )}
       </div>
     </section>
