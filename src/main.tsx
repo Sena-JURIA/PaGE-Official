@@ -18,13 +18,21 @@ function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+  }, [isMenuOpen]);
+
   return (
     <>
       <div className={`splash-overlay${showSplash ? "" : " hide"}`}>
         <h1 className="splash-title">PaGE</h1>
       </div>
       <div className={`main-content${showSplash ? " hidden" : ""}`}>
-        <header>
+        <header className="site-header">
           <a href="/"><h1>PaGE</h1></a>
           <button 
             className="menu-toggle" 
@@ -37,7 +45,7 @@ function Home() {
             <span className="hamburger-bar"></span>
             <span className="hamburger-bar"></span>
           </button>
-          <nav id="main-nav" className={`mobile-nav ${isMenuOpen ? 'is-open' : ''}`}>
+          <nav id="main-nav" className={`desktop-nav`}>
             <ul>
               <li><a href="/" className="active">ホーム</a></li>
               <li><a href="#activities">活動内容</a></li>
@@ -46,6 +54,16 @@ function Home() {
               <li><a href="#">その他</a></li>
             </ul>
           </nav>
+          <nav id="main-nav-mobile" className={`mobile-nav ${isMenuOpen ? 'is-open' : ''}`}>
+            <ul>
+              <li><a href="/" className="active">ホーム</a></li>
+              <li><a href="#activities">活動内容</a></li>
+              <li><a href="/blog">ブログ</a></li>
+              <li><a href="#links">リンク</a></li>
+              <li><a href="#">その他</a></li>
+            </ul>
+          </nav>
+          <div className={`menu-overlay ${isMenuOpen ? 'is-open' : ''}`} onClick={() => setIsMenuOpen(false)}></div>
         </header>
 
         <main>
@@ -124,7 +142,7 @@ function Home() {
           </section>
         </main>
 
-        <footer>
+        <footer className="site-footer">
           <section>
             <h4>リンク</h4>
             <a href="#" className="footer-link">About Us</a>
@@ -137,7 +155,7 @@ function Home() {
             <a href="#" className="footer-link">あ</a>
             <a href="#" className="footer-link">ああ</a>
             <a href="#" className="footer-link">あああ</a>
-            <a href="#" className="footer-link">ああああ</a>
+            <a href="#" className="footer-link">��あああ</a>
           </section>
           <section>
             <h4>仮2</h4>
