@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PaGE</title>
+    <link rel="stylesheet" href="QandA.css" />
+</head>
+<body>
+    <div id="app-container"></div>
+
+    <header>
+        <h1>PaGE</h1>
+        <nav>
+            <ul>
+                <li><a href="#hero" class="nav-active">ホーム</a></li>
+                <li><a href="#faq-section">活動内容</a></li>
+                <li><a href="#links-section">リンク</a></li>
+                <li><a href="#">その他</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="faq-section" class="content-block faq-block">
+            <h2 class="section-heading">
+                <span class="title-main">Q&A</span>
+                <span class="title-sub">よくある質問</span>
+            </h2>
+        </section>
+        <div class="card-layout-container">
+            <div class="info-card">
+                <div class="info-card-content">
+                    <h3>入会方法を教えてください</h3>
+                    <p>A.興味を持ってくださりありがとうございます。<br>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdP_kxvYST2-IFc7e1RF7_OQ1A-JOQbURd275pC5UM6CdRg8A/viewform?usp=header" class="form-button-link">入会ホームはこちらです</a></p>
+                </div>    
+            </div>
+            <div class="info-card">
+                <div class="info-card-content">
+                    <h3>どのように活動しますか？</h3>
+                    <p>A.主にDiscordを使っています。対面で活動することもあります。</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-card-content">
+                    <h3>対面で活動する場合、場所はどこになりますか？</h3>
+                    <p>A.基本的に四条畷キャンパスを予定しています。
+                        それ以外の場所で合同ゼミなどをすることもありますがその場合は随時連絡いたします。</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-card-content">
+                    <h3>入会費はかかりますか？</h3>
+                    <p>A.かかりません。あとから請求することもいたしません</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-card-content">
+                    <h3>入会費はかかりますか？</h3>
+                    <p>A.かかりません。あとから請求することもいたしません</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-card-content">
+                    <h3>どういったことが学べますか？</h3>
+                    <p>A.資格やAI、プログラムなどが学べます。</p>
+                </div>
+            </div>    
+            <div class="info-card">
+                <div class="info-card-content">
+                    <h3>未経験でも大丈夫ですか？</h3>
+                    <p>A.全然大丈夫です!やる気のある方でしたらいつでもwelcomeです!</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <div class="info-card-content">
+                    <h3>このほかに質問がある方</h3>
+                    <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSfV15V1XAoV1zb_mVhaQTog_PpEHnSk0Cf5kLwwSrPAb6Cuaw/viewform?usp=header" class="form-button-link">お問い合わせフォーム</a>
+                        にご質問下さい
+                    </p>
+                </div>
+            </div>
+        </div> 
+    </main>
+
+    <section id="links-section" class="content-block external-links-block">
+        <h2 class="section-heading">関連リンク</h2>
+        <a href="#">GitHub</a>
+        <a href="#">ブログ記事</a>
+        <a href="https://x.com/WearePaGE0125">X (旧Twitter)</a>
+        <a href="#">作品ポートフォリオ</a>
+    </section>
+
+    <footer>
+        <section>
+            <a href="#" class="footer-nav-link">About Us</a>
+            <a href="#" class="footer-nav-link">ブログ記事</a>
+            <a href="https://x.com/WearePaGE0125" class="footer-nav-link">X (旧Twitter)</a>
+            <a href="#" class="footer-nav-link">作品ポートフォリオ</a>
+        </section>
+        <p>&copy; 2025 PaGE. All Rights Reserved.</p>
+    </footer>
+
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+        // 簡単なスムーススクロールとアクティブリンク処理（参考）
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+
+                // targetIdが'#'だけでないことを確認
+                if (targetId.length > 1) {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement){
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                        // アクティブクラスの切り替え
+                        document.querySelectorAll('nav a').forEach(link => link.classList.remove('nav-active'));
+                        this.classList.add('nav-active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
