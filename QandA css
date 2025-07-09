@@ -1,0 +1,275 @@
+/* 基本設定 */
+body {
+    font-family: 'Segoe UI', 'Meiryo', 'Hiragino Sans', 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+}
+
+/* #rootはindex.htmlに残っているため、このセレクタは変更しません */
+#root {
+    /* Reactアプリケーションがここにレンダリングされる想定 */
+}
+
+/* ヘッダー */
+header {
+    background-color: #ffffff;
+    padding: 15px 50px;
+    color: #0078D4;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #0078D4;
+}
+
+/* ナビゲーション */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    color: #333333;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 0px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-bottom-color 0.2s ease;
+}
+
+/* React側で付与するクラス名に合わせてセレクタを変更 */
+nav ul li a:hover, nav ul li a.nav-active {
+    color: #0078D4;
+    border-bottom-color: #0078D4;
+}
+
+/* メインコンテンツ */
+main {
+    padding: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* .content-section から .content-block へ変更 */
+.content-block {
+    padding: 60px 30px; /* 上下のパディングを少し広げる */
+}
+.content-block:nth-child(even) {
+     /* background-color: #ffffff; */
+}
+
+
+/* --- ヒーローセクション (将来的に追加する場合のために残しておきます) --- */
+.hero-section {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+/* (以下、.hero-text, .cta-button, .hero-image などのスタイルは省略) */
+
+
+/* --- セクションタイトル --- */
+:root {
+    --primary-blue: #0078D4;
+    --light-gray-bg: #f8f9fa;
+    --dark-text: #212529;
+    --header-shadow: rgba(0,0,0,0.05);
+    --card-shadow: rgba(0,0,0,0.06);
+    --max-content-width: 1200px;
+}
+
+/* .section-title から .section-heading へ変更 */
+.section-heading {
+    margin-top: 0;
+    margin-bottom: 50px;
+    color: var(--dark-text);
+    font-weight: 600;
+    box-sizing: border-box;
+    padding-left: 50px;
+    display: flex;
+    align-items: baseline;
+    gap: 30px;
+}
+
+/* .qna-main-title から .title-main へ変更 */
+.title-main {
+    font-size: 2.5em;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.title-main::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-blue);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+/* .faq-label から .title-sub へ変更 */
+.title-sub {
+    font-size: 1.5em; /* バランス調整 */
+    color: #555;
+    font-weight: 500;
+}
+
+/* レスポンシブ対応 (タイトル) */
+@media (max-width: 768px) {
+    .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        padding-left: 20px;
+    }
+    .title-main {
+        font-size: 2.2em; /* モバイルでのサイズ調整 */
+        padding-bottom: 5px;
+    }
+    .title-sub {
+        font-size: 1.2em; /* モバイルでのサイズ調整 */
+    }
+    .title-main::after {
+        height: 2px;
+    }
+}
+
+/* --- Q&Aカード --- */
+.faq-block {
+    background-color: #f8f9fa;
+}
+
+/* .cards-container から .card-layout-container へ変更 */
+.card-layout-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* .activity-card から .info-card へ変更 */
+.info-card {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.info-card-content {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-card h3 {
+    font-size: 1.4em;
+    color: #0078D4;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.info-card p {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: auto;
+    padding-bottom: 15px;
+}
+
+/* フォームへのリンクボタンのスタイル */
+.form-button-link {
+    display: inline-block;
+    color: #0078D4;
+    text-decoration: none;
+    font-weight: 600;
+    transition: text-decoration 0.2s;
+}
+.form-button-link:hover {
+    text-decoration: underline;
+}
+
+/* --- リンク集 --- */
+/* .links-section から .external-links-block へ変更 */
+.external-links-block {
+    text-align: center;
+    background-color: #ffffff;
+}
+.external-links-block .section-heading {
+    justify-content: center; /* タイトルを中央揃えに */
+    padding-left: 0;
+    gap: 15px;
+}
+
+.external-links-block a {
+    display: inline-block;
+    margin: 8px 12px;
+    color: #0078D4;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px 20px;
+    border: 1px solid #0078D4;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.external-links-block a:hover {
+    background-color: #0078D4;
+    color: white;
+}
+
+/* フッター */
+footer {
+    text-align: center;
+    padding: 30px 50px;
+    background-color: #343a40;
+    color: #adb5bd;
+    font-size: 0.9em;
+}
+footer p {
+    margin: 0;
+    margin-top: 20px; /* 上のリンクとの間隔 */
+}
+
+/* footer a から .footer-nav-link へ変更 */
+footer .footer-nav-link {
+    color: #adb5bd;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    margin: 0 15px;
+}
+footer .footer-nav-link:hover {
+    color: #ffffff;
+}
