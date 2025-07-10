@@ -1,4 +1,3 @@
-
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import React, { useEffect, useState } from "react";
@@ -8,23 +7,16 @@ import HeroCarousel from "./components/HeroCarousel";
 import BlogList from './components/BlogList';
 import BlogPostPage from './pages/blog/BlogPostPage';
 import BlogLayout from './pages/blog/BlogLayout'; // Import the new BlogLayout
+import QandA from './components/QandA';
+import Layout from './components/Layout';
 
 function Home() {
   const [showSplash, setShowSplash] = useState(true);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowSplash(false), 1500);
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-    }
-  }, [isMenuOpen]);
 
   return (
     <>
@@ -32,41 +24,6 @@ function Home() {
         <h1 className="splash-title">PaGE</h1>
       </div>
       <div className={`main-content${showSplash ? " hidden" : ""}`}>
-        <header className="site-header">
-          <a href="/"><h1>PaGE</h1></a>
-          <button 
-            className="menu-toggle" 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-expanded={isMenuOpen}
-            aria-controls="main-nav"
-          >
-            <span className="sr-only">メニューを開閉</span>
-            <span className="hamburger-bar"></span>
-            <span className="hamburger-bar"></span>
-            <span className="hamburger-bar"></span>
-          </button>
-          <nav id="main-nav" className={`desktop-nav`}>
-            <ul>
-              <li><a href="/" className="active">ホーム</a></li>
-              <li><a href="#activities">活動内容</a></li>
-              <li><a href="/blog">ブログ</a></li>
-              <li><a href="#links">リンク</a></li>
-              <li><a href="#">その他</a></li>
-            </ul>
-          </nav>
-          <nav id="main-nav-mobile" className={`mobile-nav ${isMenuOpen ? 'is-open' : ''}`}>
-            <ul>
-              <li><a href="/" className="active">ホーム</a></li>
-              <li><a href="#activities">活動内容</a></li>
-              <li><a href="/blog">ブログ</a></li>
-              <li><a href="#links">リンク</a></li>
-              <li><a href="#">その他</a></li>
-            </ul>
-          </nav>
-          <div className={`menu-overlay ${isMenuOpen ? 'is-open' : ''}`} onClick={() => setIsMenuOpen(false)}></div>
-        </header>
-
-        <main>
           <section
             id="hero"
             className="hero-section content-section"
@@ -129,7 +86,7 @@ function Home() {
                   <li>ゲームやWebサービスが好きな方</li>
                 </ul>
               </div>
-              <a href="#contact" className="cta-button">参加申請フォームへ</a>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSdP_kxvYST2-IFc7e1RF7_OQ1A-JOQbURd275pC5UM6CdRg8A/viewform" className="cta-button">参加申請フォームへ</a>
             </div>
           </section>
 
@@ -140,32 +97,6 @@ function Home() {
             <a href="https://x.com/WearePaGE0125">X (旧Twitter)</a>
             <a href="#">作品ポートフォリオ</a>
           </section>
-        </main>
-
-        <footer className="site-footer">
-          <section>
-            <h4>リンク</h4>
-            <a href="#" className="footer-link">About Us</a>
-            <a href="/blog" className="footer-link">ブログ記事</a>
-            <a href="https://x.com/WearePaGE0125" className="footer-link">X (旧Twitter)</a>
-            <a href="#" className="footer-link">作品ポートフォリオ</a>
-          </section>
-          <section>
-            <h4>仮</h4>
-            <a href="#" className="footer-link">あ</a>
-            <a href="#" className="footer-link">ああ</a>
-            <a href="#" className="footer-link">あああ</a>
-            <a href="#" className="footer-link">��あああ</a>
-          </section>
-          <section>
-            <h4>仮2</h4>
-            <a href="#" className="footer-link">あ</a>
-            <a href="#" className="footer-link">ああ</a>
-            <a href="#" className="footer-link">あああ</a>
-            <a href="#" className="footer-link">ああああ</a>
-          </section>
-          <p>&copy; 2025 PaGE. All Rights Reserved.</p>
-        </footer>
       </div>
     </>
   );
@@ -174,16 +105,18 @@ function Home() {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/blog" element={<BlogLayout />}>
-          <Route index element={<BlogList />} />
-          <Route path=":postId" element={<BlogPostPage />} />
-          <Route path="tags/:tagName" element={<BlogList />} />
-          <Route path="authors/:authorId" element={<BlogList />} />
-        </Route>
-      </Routes>
+  <Routes>
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Home />} />
+      <Route path="qanda" element={<QandA />} />
+    </Route>
+    <Route path="/blog" element={<BlogLayout />}>
+      <Route index element={<BlogList />} />
+      <Route path=":postId" element={<BlogPostPage />} />
+      <Route path="tags/:tagName" element={<BlogList />} />
+      <Route path="authors/:authorId" element={<BlogList />} />
+    </Route>
+  </Routes>
     </Router>
   </StrictMode>,
 );
-
