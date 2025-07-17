@@ -49,7 +49,11 @@ export async function getPosts(): Promise<Post[]> {
     })
   );
 
-  // 日付の降順でソート
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  // 日付の降順でソート（yyyy年mm月dd日形式に対応）
+  return posts.sort((a, b) => {
+    const dateB = new Date(b.date.replace(/年|月/g, '-').replace(/日/g, ''));
+    const dateA = new Date(a.date.replace(/年|月/g, '-').replace(/日/g, ''));
+    return dateB.getTime() - dateA.getTime();
+  });
 }
 // Force Vite to re-process this file
