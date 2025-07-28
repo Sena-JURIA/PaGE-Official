@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getPosts } from '../../data/blogPosts';
+import { getPostById } from '../../data/blogPosts';
 import type { Post } from '../../types/Post';
 import './BlogPostPage.css';
 
@@ -12,8 +12,8 @@ const BlogPostPage: React.FC = () => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const posts = await getPosts();
-      const foundPost = posts.find(p => p.id === postId);
+      if (!postId) return;
+      const foundPost = await getPostById(postId);
       setPost(foundPost || null);
       setLoading(false);
     };

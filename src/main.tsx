@@ -35,35 +35,35 @@ function Home() {
             <h2 className="section-title">主な活動</h2>
             <div className="cards-container">
               <div className="activity-card">
-                <img src="https://placehold.co/400x250/FFDC00/333?text= アルゴリズム" alt="アルゴリズム" />
+                <img src="https://placehold.co/400x250/FFDC00/333?text=Algorithm" alt="アルゴリズム" />
                 <div className="activity-card-content">
                   <h3>アルゴリズム系の取り組み</h3>
                   <p>AtCoderへの参加や、頻出アルゴリズムについて学ぶ機会を設ける予定です。</p>
-                  <a href="#" className="card-link">もっと見る &rarr;</a>
+                  <a href="#" className="card-link">Coming Soon...</a>
                 </div>
               </div>
               <div className="activity-card">
-                <img src="https://placehold.co/400x250/0074D9/FFF?text=Webサイト開発" alt="Webサイト開発" />
+                <img src="https://placehold.co/400x250/0074D9/FFF?text=Web" alt="Webサイト開発" />
                 <div className="activity-card-content">
                   <h3>Webサイト開発</h3>
                   <p>React + TypeScriptを用いてサイトを制作しております。</p>
-                  <a href="#" className="card-link">もっと見る &rarr;</a>
+                  <a href="#" className="card-link">Coming Soon...</a>
                 </div>
               </div>
               <div className="activity-card">
-                <img src="https://placehold.co/400x250/F012BE/FFF?text=ゲーム制作" alt="ゲーム制作" />
+                <img src="https://placehold.co/400x250/F012BE/FFF?text=Game" alt="ゲーム制作" />
                 <div className="activity-card-content">
                   <h3>ゲーム制作</h3>
                   <p>ゲーム</p>
-                  <a href="#" className="card-link">もっと見る &rarr;</a>
+                  <a href="#" className="card-link">Coming Soon...</a>
                 </div>
               </div>
               <div className="activity-card">
-                <img src="https://placehold.co/400x250/2ECC40/FFF?text=資格勉強" alt="資格勉強" />
+                <img src="https://placehold.co/400x250/2ECC40/FFF?text=FE" alt="資格勉強" />
                 <div className="activity-card-content">
                   <h3>資格勉強の取り組み</h3>
                   <p>基本情報技術者試験に向けて頑張っています。</p>
-                  <a href="#" className="card-link">もっと見る &rarr;</a>
+                  <a href="#" className="card-link">Coming Soon...</a>
                 </div>
               </div>
             </div>
