@@ -1,6 +1,5 @@
-import { StrictMode } from 'react';
+import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 import HeroCarousel from "./components/HeroCarousel";

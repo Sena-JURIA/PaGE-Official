@@ -28,7 +28,7 @@ const Layout: React.FC = () => {
   return (
     <>
       <header className="site-header">
-        <a href="/"><h1>PaGE</h1></a>
+  <Link to="/"><h1>PaGE</h1></Link>
         <button 
           className="menu-toggle" 
           onClick={() => setIsMenuOpen(!isMenuOpen)}

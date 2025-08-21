@@ -1,28 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getPosts } from '../data/blogPosts';
 import type { Post } from '../types/Post';
 import BlogCard from './BlogCard';
 import './Blog.css';
 
-const useQuery = () => {
-  return new URLSearchParams(useLocation().search);
-};
-
 const BlogList: React.FC = () => {
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
-  const [allTags, setAllTags] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const { tagName, authorId } = useParams<{ tagName?: string; authorId?: string }>();
 
   useEffect(() => {
     const fetchPostsAndTags = async () => {
       const fetchedPosts = await getPosts();
-      const uniqueTags = [...new Set(fetchedPosts.flatMap(p => p.tags))];
-      
       setAllPosts(fetchedPosts);
-      setAllTags(uniqueTags.sort());
       setLoading(false);
     };
 

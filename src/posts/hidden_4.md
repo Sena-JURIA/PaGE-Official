@@ -4,7 +4,7 @@ date: "2025年6月26日"
 authorId: "yes_antikiss"
 excerpt: "これはテストだよ"
 imageUrl: "https://placehold.co/400x250/0074D9/FFFFFF?text=test"
-tags: ["test"]
+tags: ["test", "hidden"]
 ---
 
 # て

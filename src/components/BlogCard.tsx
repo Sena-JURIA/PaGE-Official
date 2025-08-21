@@ -10,7 +10,7 @@ type BlogCardProps = {
 const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
   return (
     <div className="blog-card">
-      <a href={post.link} className="blog-card-link-wrapper">
+      <Link to={post.link} className="blog-card-link-wrapper">
         <img src={post.imageUrl} alt={post.title} className="blog-card-img" />
         <div className="blog-card-content">
           <p className="blog-card-date">{post.date} - <Link to={`/blog/authors/${post.author.id}`} onClick={(e) => e.stopPropagation()}>{post.author.name}</Link></p>
@@ -24,9 +24,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
             ))}
           </div>
         </div>
-      </a>
+      </Link>
       <div className="blog-card-footer">
-        <a href={post.link} className="card-link">続きを読む &rarr;</a>
+        <Link to={post.link} className="card-link">続きを読む &rarr;</Link>
       </div>
     </div>
   );

@@ -31,19 +31,27 @@ const BlogPostPage: React.FC = () => {
 
   return (
     <div className="blog-post-page">
-      <div className="post-hero">
-        <div className="post-hero-text">
-          <h1 className="post-title">{post.title}</h1>
-          <p className="post-meta">
-            <span className="post-author">{post.author.name}</span>
-            <span className="post-date">{post.date}</span>
-          </p>
-          <div className="post-tags">
-            {post.tags.map(tag => (
-              <Link to={`/blog/tags/${tag}`} key={tag} className="tag">
-                {tag}
+      <div 
+        className="post-hero" 
+        style={{ backgroundImage: `url(${post.imageUrl})` }}
+      >
+        <div className="post-hero-overlay">
+          <div className="post-hero-text">
+            <h1 className="post-title">{post.title}</h1>
+            <p className="post-meta">
+              <Link to={`/blog/authors/${post.author.id}`} className="post-author author-link" aria-label={`${post.author.name} の記事一覧へ`}>
+                <img className="post-author-avatar" src={post.author.avatarUrl} alt={post.author.name} />
+                <span className="post-author-name-text">{post.author.name}</span>
               </Link>
-            ))}
+              <span className="post-date">{post.date}</span>
+            </p>
+            <div className="post-tags">
+              {post.tags.map(tag => (
+                <Link to={`/blog/tags/${tag}`} key={tag} className="tag">
+                  {tag}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>

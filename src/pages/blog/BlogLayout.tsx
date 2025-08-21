@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import '../../main.css'; // Import main CSS for consistent styling
 import './BlogLayout.css'; // Specific styles for the blog layout
 
@@ -17,7 +17,7 @@ const BlogLayout: React.FC = () => {
   return (
     <div className="blog-layout">
       <header className="site-header">
-          <a href="/blog"><h1>PaGE Blog</h1></a>
+          <Link to="/blog"><h1>PaGE Blog</h1></Link>
           <button 
             className={`menu-toggle ${isMenuOpen ? 'is-open' : ''}`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -31,14 +31,14 @@ const BlogLayout: React.FC = () => {
           </button>
           <nav id="blog-main-nav" className="desktop-nav">
             <ul>
-              <li><a href="/">ホーム</a></li>
-              <li><a href="/blog">ブログトップ</a></li>
+              <li><Link to="/">ホーム</Link></li>
+              <li><Link to="/blog">ブログトップ</Link></li>
             </ul>
           </nav>
           <nav id="blog-main-nav-mobile" className={`mobile-nav ${isMenuOpen ? 'is-open' : ''}`}>
             <ul>
-              <li><a href="/">ホーム</a></li>
-              <li><a href="/blog">ブログトップ</a></li>
+              <li><Link to="/">ホーム</Link></li>
+              <li><Link to="/blog">ブログトップ</Link></li>
             </ul>
           </nav>
           <div className={`menu-overlay ${isMenuOpen ? 'is-open' : ''}`} onClick={() => setIsMenuOpen(false)}></div>

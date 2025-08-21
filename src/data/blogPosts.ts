@@ -22,8 +22,16 @@ interface FrontMatterAttributes {
   tags?: string[]; // tagsはオプショナル
 }
 
+// ---- 新実装: import.meta.glob を統一利用し、ビルド後も確実にバンドルへ含める ----
+
+const postFileLoaders = import.meta.glob('../posts/*.md', { as: 'raw' });
+
+function pathToId(path: string): string {
+  return path.split('/').pop()?.replace('.md', '') || '';
+}
+
 async function processPost(path: string, loader: () => Promise<string>): Promise<Post> {
-  const id = path.split('/').pop()?.replace('.md', '') || '';
+  const id = pathToId(path);
   const rawContent = await loader();
   const { attributes, body } = fm<FrontMatterAttributes>(rawContent);
   const htmlContent = marked(body) as string;
@@ -37,42 +45,49 @@ async function processPost(path: string, loader: () => Promise<string>): Promise
     id,
     ...attributes,
     author,
-    tags: attributes.tags || [], // tagsがなければ空配列
+    tags: attributes.tags || [],
     link: `/blog/${id}`,
     content: htmlContent,
   };
 }
 
+let cachedPosts: Post[] | null = null;
+
 export async function getPosts(): Promise<Post[]> {
-  const files = import.meta.glob('../posts/*.md', { as: 'raw' });
+  if (cachedPosts) return cachedPosts;
 
   const postsData = await Promise.all(
-    Object.entries(files).map(([path, loader]) => processPost(path, loader))
+    Object.entries(postFileLoaders).map(([path, loader]) => processPost(path, loader as () => Promise<string>))
   );
 
-  // 'hidden'タグを持つ投稿を除外
   const visiblePosts = postsData.filter(post => !post.tags.includes('hidden'));
-
-  // 日付の降順でソート（yyyy年mm月dd日形式に対応）
-  return visiblePosts.sort((a, b) => {
+  cachedPosts = visiblePosts.sort((a, b) => {
     const dateB = new Date(b.date.replace(/年|月/g, '-').replace(/日/g, ''));
     const dateA = new Date(a.date.replace(/年|月/g, '-').replace(/日/g, ''));
     return dateB.getTime() - dateA.getTime();
   });
+  return cachedPosts;
 }
 
 export async function getPostById(id: string): Promise<Post | null> {
+  // まずキャッシュ済みならそこから
+  if (cachedPosts) {
+    const found = cachedPosts.find(p => p.id === id);
+    if (found) return found;
+  }
+  // 未キャッシュなら対象ファイルを特定して個別ロード
+  const entry = Object.entries(postFileLoaders).find(([path]) => path.endsWith(`/${id}.md`));
+  if (!entry) return null;
   try {
-    // Viteの動的インポート機能を利用して、指定されたIDのMarkdownファイルを取得
-    const loader = (await import(/* @vite-ignore */ `../posts/${id}.md?raw`)).default;
-    // processPostを呼び出して投稿データを処理
-    const post = await processPost(`../posts/${id}.md`, async () => loader);
+    const [path, loader] = entry;
+    const post = await processPost(path, loader as () => Promise<string>);
+    // キャッシュへ追加
+    if (cachedPosts) cachedPosts = [...cachedPosts, post];
     return post;
-  } catch (error) {
-    // エラーが発生した場合はコンソールに出力し、nullを返す
-    console.error(`Error fetching post with id "${id}":`, error);
+  } catch (e) {
+    console.error(`Error processing post ${id}:`, e);
     return null;
   }
 }
 
-// Force Vite to re-process this file
+// (再ビルド強制用途のダミーエクスポート防止コメント)
