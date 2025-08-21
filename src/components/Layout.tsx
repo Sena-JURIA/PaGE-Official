@@ -47,7 +47,6 @@ const Layout: React.FC = () => {
             <li><Link to="/blog" className={getLinkClass('/blog')}>ブログ</Link></li>
             <li><Link to="/qanda" className={getLinkClass('/qanda')}>Q&A</Link></li>
             <li><a href="/#links">リンク</a></li>
-            <li><a href="#">その他</a></li>
           </ul>
         </nav>
         <nav id="main-nav-mobile" className={`mobile-nav ${isMenuOpen ? 'is-open' : ''}`}>
@@ -70,25 +69,11 @@ const Layout: React.FC = () => {
       <footer className="site-footer">
         <section>
           <h4>リンク</h4>
-          <a href="#" className="footer-link">About Us</a>
           <a href="/blog" className="footer-link">ブログ記事</a>
           <a href="https://x.com/WearePaGE0125" className="footer-link">X (旧Twitter)</a>
-          <a href="#" className="footer-link">作品ポートフォリオ</a>
+          <a href="/qanda" className="footer-link">Q&A</a>
         </section>
-        <section>
-          <h4>仮</h4>
-          <a href="#" className="footer-link">あ</a>
-          <a href="#" className="footer-link">ああ</a>
-          <a href="#" className="footer-link">あああ</a>
-          <a href="#" className="footer-link">ああああ</a>
-        </section>
-        <section>
-          <h4>仮2</h4>
-          <a href="#" className="footer-link">あ</a>
-          <a href="#" className="footer-link">ああ</a>
-          <a href="#" className="footer-link">あああ</a>
-          <a href="#" className="footer-link">ああああ</a>
-        </section>
+        
         <p>&copy; 2025 PaGE. All Rights Reserved.</p>
       </footer>
     </>

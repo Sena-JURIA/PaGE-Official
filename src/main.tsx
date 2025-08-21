@@ -9,6 +9,7 @@ import BlogPostPage from './pages/blog/BlogPostPage';
 import BlogLayout from './pages/blog/BlogLayout'; // Import the new BlogLayout
 import QandA from './components/QandA';
 import Layout from './components/Layout';
+import gameImageUrl from './assets/images/game_image.png';
 
 function Home() {
   const [showSplash, setShowSplash] = useState(true);
@@ -51,18 +52,18 @@ function Home() {
                 </div>
               </div>
               <div className="activity-card">
-                <img src="https://placehold.co/400x250/F012BE/FFF?text=Game" alt="ゲーム制作" />
+                <img src={gameImageUrl} alt="ゲーム制作" />
                 <div className="activity-card-content">
                   <h3>ゲーム制作</h3>
-                  <p>ゲーム</p>
+                  <p>「ゔぃおーら・るなてぃっく！」をはじめ、様々なゲームを制作しています。</p>
                   <a href="#" className="card-link">Coming Soon...</a>
                 </div>
               </div>
               <div className="activity-card">
-                <img src="https://placehold.co/400x250/2ECC40/FFF?text=FE" alt="資格勉強" />
+                <img src="https://placehold.co/400x250/2ECC40/FFF?text=???" alt="資格勉強" />
                 <div className="activity-card-content">
-                  <h3>資格勉強の取り組み</h3>
-                  <p>基本情報技術者試験に向けて頑張っています。</p>
+                  <h3>その他</h3>
+                  <p>色々準備してます</p>
                   <a href="#" className="card-link">Coming Soon...</a>
                 </div>
               </div>
@@ -95,7 +96,7 @@ function Home() {
             <a href="#">GitHub</a>
             <a href="/blog">ブログ記事</a>
             <a href="https://x.com/WearePaGE0125">X (旧Twitter)</a>
-            <a href="#">作品ポートフォリオ</a>
+            <a href="/qanda">Q&A</a>
           </section>
       </div>
     </>
