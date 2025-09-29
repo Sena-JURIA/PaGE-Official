@@ -1,11 +1,9 @@
-import { useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getGameById } from './components/games';
 
 export default function GameDetailPage() {
   const { gameId } = useParams<{ gameId: string }>();
   const game = getGameById(gameId);
-  const audioRef = useRef<HTMLAudioElement>(null);
 
   if (!game) {
     return (
