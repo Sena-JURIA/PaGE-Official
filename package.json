@@ -1,6 +1,7 @@
 {
   "name": "my-react-app",
   "private": true,
+  "homepage": "https://github.com/Sena-JURIA/PaGE-Official.git",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
