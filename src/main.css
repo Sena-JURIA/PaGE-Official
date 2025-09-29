@@ -95,6 +95,13 @@ header h1 img {
     display: flex;
 }
 
+.desktop-nav-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-left: auto;
+}
+
 .desktop-nav ul li {
     margin-left: 30px;
 }
@@ -118,8 +125,7 @@ header h1 img {
     border: none;
     cursor: pointer;
     padding: 10px;
-    z-index: 1010;
-    margin-left: auto; /* これを追加して右寄せにする */
+    z-index: 1010; 
 }
 
 .menu-overlay {
@@ -423,6 +429,52 @@ main {
     text-decoration: underline;
 }
 
+/* --- 水平レイアウト用の修飾子 --- */
+.activity-card--horizontal {
+    grid-column: 1 / -1; /* コンテナがグリッドの場合、全幅を占有 */
+    flex-direction: row;
+    align-items: flex-start; /* 上揃え */
+}
+
+.activity-card--horizontal img {
+    width: 250px; /* 画像の幅を固定 */
+    height: auto;
+    align-self: stretch; /* カードの高さに合わせる */
+    flex-shrink: 0;
+}
+
+/* 768px以下のスクリーンでは縦積みに戻す */
+@media (max-width: 768px) {
+    .activity-card--horizontal {
+        flex-direction: column;
+    }
+    .activity-card--horizontal img {
+        width: 100%;
+        height: 250px; /* 高さを指定 */
+        align-self: initial;
+    }
+}
+
+/* --- サブセクションタイトル --- */
+.sub-section-title {
+    grid-column: 1 / -1; /* グリッドレイアウトで全幅を占める */
+    text-align: center;
+    font-size: 1.8em;
+    margin-top: 40px;
+    margin-bottom: 10px; /* 下のカードとの間隔を調整 */
+    color: var(--color-text-accent);
+    font-weight: 600;
+}
+
+.sub-section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background-color: var(--color-border-primary);
+    margin: 8px auto 0;
+}
+
 /* --- 参加勧誘セクション (Join Us Section) --- */
 .join-us-section {
     background-color: var(--color-background-accent);
@@ -540,14 +592,9 @@ main {
 }
 
 @media (max-width: 768px) {
-    .desktop-nav {
+    .desktop-nav-container {
         display: none;
     }
-
-    
-
-    
-
     .mobile-nav {
         position: fixed;
         top: 0;

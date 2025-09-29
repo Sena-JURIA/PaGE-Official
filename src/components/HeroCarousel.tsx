@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { getPosts } from "../data/blogPosts";
+// import { getPosts } from "../data/blogPosts"; // APIからのフェッチは不要になります
 import { Link } from "react-router-dom";
+import festivalInfo from "../assets/images/400.png"; // 大学祭情報のインポート
 
 interface Slide {
   img: string;
@@ -9,29 +10,37 @@ interface Slide {
   link: string;
 }
 
+// 静的なスライドデータ。ブログ記事の代わりにこちらを使用します。
+const staticSlides: Slide[] = [
+  {
+    img: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop',
+    title: 'PaGEへようこそ！',
+    desc: '私たちはゲーム制作や競技プログラミングなど、様々な活動を行っています。',
+    link: '#activities',
+  },
+  {
+    img: festivalInfo,
+    title: '大学祭に出展します！',
+    desc: '今年の大学祭では、私たちが制作したゲームを展示します。ぜひ遊びに来てください！',
+    link: '/festival-page',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1580894732444-8ec53925b354?q=80&w=2070&auto=format&fit=crop',
+    title: '新メンバー募集中',
+    desc: 'プログラミングに興味がある方、一緒に何かを作りたい方、いつでも大歓迎です！',
+    link: '#join-us',
+  },
+];
+
 export default function HeroCarousel() {
   const [slides, setSlides] = useState<Slide[]>([]);
   const [current, setCurrent] = useState(0);
   const [isZooming, setIsZooming] = useState(true);
+  const [error] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const posts = await getPosts();
-        const latestPosts = posts.slice(0, 3).map(post => ({
-          img: post.imageUrl,
-          title: post.title,
-          desc: post.excerpt,
-          link: `/blog/${post.id}`
-        }));
-        setSlides(latestPosts);
-      } catch (error) {
-        console.error("Failed to fetch posts for carousel:", error);
-        // Optionally, set some default slides or an error state
-      }
-    };
-
-    fetchPosts();
+    // APIからブログ記事をフェッチする代わりに、静的なデータをセットします。
+    setSlides(staticSlides);
   }, []);
 
   const goTo = (idx: number) => setCurrent(idx);
@@ -46,6 +55,10 @@ export default function HeroCarousel() {
       return () => clearTimeout(timer);
     }
   }, [current, slides.length]);
+
+  if (error) {
+    return <div className="hero-carousel-error">カルーセルを読み込めませんでした: {error}</div>;
+  }
 
   if (slides.length === 0) {
     return <div className="hero-carousel-loading">Loading...</div>; // Or a placeholder

@@ -1,0 +1,805 @@
+/* Google Fonts を使用する場合のインポート例 (HTMLの<head>に追加、またはCSSの最初で@import) */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@300;400;600&display=swap'); */
+
+:root {
+    /* 基本カラーパレット */
+    --color-background-body: #F4F8FF;       /* 全体の背景 (ごく薄いブルー) */
+    --color-background-light: #FFFFFF;     /* 明るい背景 (白) */
+    --color-background-accent: #E6F0FA;    /* アクセント背景 (薄いブルー) */
+    --color-background-footer: #333333;    /* フッター背景 (黒に近い濃いグレー) */
+
+    --color-text-primary: #34495E;        /* 基本テキスト (ダークブルーグレー) */
+    --color-text-secondary: #556A7B;      /* やや薄いテキスト (落ち着いたグレー) */
+    --color-text-accent: #2C3E50;         /* 強調テキスト・ロゴ (濃いグレー/黒) */
+    --color-text-subtle: #7F8C8D;         /* 控えめなテキスト・リンク (中間グレー) */
+    --color-text-footer: #CCCCCC;         /* フッター基本テキスト (明るいグレー) */
+    --color-text-footer-light: #B0B0B0;   /* フッターリンク (明るいグレー) */
+    --color-text-footer-heading: #FFFFFF; /* フッター見出し (白) */
+    --color-text-footer-copyright: #AAAAAA;/* フッターコピーライト (中間的な明るいグレー) */
+
+
+    --color-border-primary: #BDC3C7;      /* 主要な境界線 (中間グレー) */
+    --color-border-secondary: #E0E6F0;     /* 薄い境界線 (薄いブルーグレー) */
+    --color-border-accent: #D8E2F1;       /* アクセント境界線 (薄いブルーグレー) */
+    --color-border-footer: #444444;       /* フッター区切り線 (少し明るいダークグレー) */
+
+    --color-cta-background: #34495E;       /* CTAボタン背景 (ダークブルーグレー) */
+    --color-cta-background-hover: #2C3E50; /* CTAボタン背景ホバー (さらに濃く) */
+    --color-cta-text: #FFFFFF;             /* CTAボタンテキスト (白) */
+
+    /* シャドウ */
+    --shadow-soft: 0 1px 4px rgba(0, 30, 80, 0.06);
+    --shadow-medium: 0 2px 8px rgba(0, 30, 80, 0.05);
+    --shadow-strong: 0 8px 25px rgba(0, 30, 80, 0.08);
+    --shadow-card-hover: 0 6px 15px rgba(0, 30, 80, 0.08);
+    --shadow-cta: 0 2px 5px rgba(0,0,0,0.1);
+    --shadow-cta-hover: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    background-color: var(--color-background-body);
+    color: var(--color-text-primary);
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+}
+
+#root {
+    /* Reactアプリケーションがここにレンダリングされる想定 */
+}
+
+.site-header {
+    background-color: var(--color-background-light);
+    padding: 15px 50px;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.site-header h1 {
+    /* font-family: 'Montserrat', sans-serif; */
+    margin: 0;
+    font-size: 1.9em;
+    font-weight: 700;
+    color: var(--color-text-accent);
+}
+/* ロゴ画像をHTMLで挿入する場合のCSS例:
+header h1 img {
+    display: block;
+    max-height: 40px;
+    width: auto;
+}
+*/
+
+.desktop-nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.desktop-nav-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-left: auto;
+}
+
+.desktop-nav ul li {
+    margin-left: 30px;
+}
+
+.desktop-nav ul li a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 0px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-bottom-color 0.2s ease;
+}
+.desktop-nav ul li a:hover,
+.desktop-nav ul li a.active {
+    color: var(--color-text-accent);
+    border-bottom-color: var(--color-border-primary);
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1010; 
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 998;
+}
+
+.menu-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hamburger-bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-text-primary);
+    margin: 5px 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+main {
+    padding: 0;
+    width: 100%;         
+    margin: 0;           
+}
+
+.content-section {
+    padding: 60px 50px;
+}
+.content-section:nth-child(odd) {
+    background-color: var(--color-background-light);
+}
+.content-section:nth-child(even) {
+    background-color: var(--color-background-body); /* bodyの背景と同じか、少し異なる薄青でも良い */
+}
+
+/* --- ヒーローセクション --- */
+.hero-section.content-section {
+            padding-top: 40px; /* カルーセルのため少し調整 */
+            padding-bottom: 40px; /* カルーセルのため少し調整 */
+            background-color: var(--color-background-light, #FFFFFF); /* CSS変数またはデフォルト白 */
+            /* 元のflex関連のスタイルはカルーセル構造に合わせて不要になるか、hero-carousel側で制御 */ /* 追加: ヒーローセクションの縦幅を拡大 */
+        }
+
+        .hero-carousel {
+            position: relative;
+            width: 100%;
+            margin: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: var(--shadow-strong, 0 8px 25px rgba(0, 30, 80, 0.08));
+
+        }
+
+        .carousel-slides-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+            box-sizing: border-box;
+            height: 60vh; /* 追加: スライドの縦幅を大きく */
+            overflow: hidden; /* 変更: 拡大時に画像が見切れないように */
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover; /* コンテナに合わせて画像を調整（見切れOK） */
+            display: block;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 60%, transparent 100%);
+            color: #FFFFFF;
+            padding: 20px 30px; /* パディングを調整 */
+            box-sizing: border-box;
+            text-align: left; /* キャプション内のテキストを左揃えに */
+        }
+
+        .slide-caption h3 {
+            /* font-family: 'Montserrat', sans-serif; /* 見出しフォント例 */
+            font-size: 2em; /* タイトルサイズ調整 */
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #FFFFFF;
+            font-weight: 700;
+        }
+
+        .slide-caption p {
+            font-size: 1em; /* 説明文サイズ調整 */
+            margin-bottom: 15px;
+            color: #f0f0f0; /* 少し明るい白 */
+            line-height: 1.5;
+        }
+
+        .slide-caption .cta-button.slide-cta {
+            /* 既存の .cta-button スタイルをベースに調整可能 */
+            background-color: var(--color-cta-text, #FFFFFF); /* 白背景 */
+            color: var(--color-cta-background, #34495E); /* 元のCTA背景色を文字色に */
+            padding: 8px 18px; /* 少し小さめに */
+            font-size: 0.9em;
+            box-shadow: none;
+        }
+        .slide-caption .cta-button.slide-cta:hover {
+            background-color: #f0f0f0; /* ホバー時少しグレーに */
+        }
+
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 24px;
+            z-index: 10;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .carousel-nav:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .carousel-nav.prev {
+            left: 15px;
+        }
+        .carousel-nav.next {
+            right: 15px;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 35px; /* キャプションと被らないように調整 */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 16px;
+            z-index: 10;
+        }
+        .carousel-dots .dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: 2px solid #fff;
+            padding: 0;         /* 追加: デフォルトの余白を消す */
+            outline: none;      /* 追加: フォーカス枠を消す（必要なら） */
+            box-sizing: border-box; /* 追加: 枠線込みでサイズを維持 */
+            display: inline-block;  /* 追加: インラインブロックで正円を維持 */
+        }
+        .carousel-dots .dot.active {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        /* 既存のCSS変数を使用する場合の調整 */
+        .hero-section.content-section {
+            background-color: var(--color-background-light, #FFFFFF);
+        }
+        .slide-caption h3 {
+             color: var(--color-cta-text, #FFFFFF); /* CTAボタンの文字色と同じ白 */
+        }
+        .slide-caption p {
+            color: #f0f0f0; /* 少し明るめの白、変数化も検討 */
+        }
+
+.hero-image {
+    flex-basis: 45%;
+    text-align: center;
+}
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: var(--shadow-strong);
+}
+
+/* --- セクションタイトル --- */
+.section-title {
+    /* font-family: 'Montserrat', sans-serif; */
+    text-align: center;
+    font-size: clamp(1.1em, 4vw, 2.2em);
+    margin-bottom: 50px;
+    color: var(--color-text-accent);
+    font-weight: 700;
+}
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 2px;
+    background-color: var(--color-border-primary);
+    margin: 10px auto 0;
+}
+
+/* --- 活動カード --- */
+.activities-list {
+    /* .content-section:nth-child(odd) で背景色が設定される想定 */
+    /* background-color: transparent; */ /* もし常にbody背景と同じにしたい場合 */
+}
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* デフォルトは3カラム */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 960px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr); /* 2カラム */
+  }
+}
+
+@media (max-width: 640px) {
+  .cards-container {
+    grid-template-columns: 1fr; /* 1カラム */
+  }
+}
+.activity-card {
+    background-color: var(--color-background-light);
+    border: 1px solid var(--color-border-secondary);
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.activity-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.activity-card-content {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.activity-card h3 {
+    /* font-family: 'Montserrat', sans-serif; */
+    font-size: 1.4em;
+    color: var(--color-text-primary);
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+.activity-card p {
+    font-size: 0.95em;
+    color: var(--color-text-secondary);
+    margin-bottom: auto;
+    padding-bottom: 15px;
+}
+.activity-card .card-link {
+    display: inline-block;
+    color: var(--color-text-subtle);
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 15px;
+    align-self: flex-start;
+}
+.activity-card .card-link:hover {
+    color: var(--color-text-primary);
+    text-decoration: underline;
+}
+
+/* --- 水平レイアウト用の修飾子 --- */
+.activity-card--horizontal {
+    grid-column: 1 / -1; /* コンテナがグリッドの場合、全幅を占有 */
+    flex-direction: row;
+    align-items: flex-start; /* 上揃え */
+}
+
+.activity-card--horizontal img {
+    width: 250px; /* 画像の幅を固定 */
+    height: auto;
+    align-self: stretch; /* カードの高さに合わせる */
+    flex-shrink: 0;
+}
+
+/* 768px以下のスクリーンでは縦積みに戻す */
+@media (max-width: 768px) {
+    .activity-card--horizontal {
+        flex-direction: column;
+    }
+    .activity-card--horizontal img {
+        width: 100%;
+        height: 250px; /* 高さを指定 */
+        align-self: initial;
+    }
+}
+
+/* --- サブセクションタイトル --- */
+.sub-section-title {
+    grid-column: 1 / -1; /* グリッドレイアウトで全幅を占める */
+    text-align: center;
+    font-size: 1.8em;
+    margin-top: 40px;
+    margin-bottom: 10px; /* 下のカードとの間隔を調整 */
+    color: var(--color-text-accent);
+    font-weight: 600;
+}
+
+.sub-section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background-color: var(--color-border-primary);
+    margin: 8px auto 0;
+}
+
+/* --- 参加勧誘セクション (Join Us Section) --- */
+.join-us-section {
+    background-color: var(--color-background-accent);
+    /* .content-section:nth-child(even) で背景色が設定される想定 */
+    text-align: center;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    padding-left: 0;
+    padding-right: 0;
+}
+.join-us-section .container {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+}
+.join-us-section .section-title {
+    margin-bottom: 25px;
+    color: var(--color-text-accent);
+}
+
+.join-us-message {
+    font-size: 1.1em;
+    color: var(--color-text-primary);
+    line-height: 1.8;
+    margin-bottom: 35px;
+}
+.join-us-details {
+    background-color: var(--color-background-light);
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 30, 80, 0.04); /* 個別指定の影 */
+    margin-bottom: 35px;
+    text-align: left;
+    border: 1px solid var(--color-border-accent);
+}
+.join-us-details p strong {
+    font-size: 1.15em;
+    color: var(--color-text-primary);
+    display: block;
+    margin-bottom: 15px;
+}
+.join-us-details ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.join-us-details ul li {
+    font-size: 1em;
+    color: var(--color-text-secondary);
+    padding: 10px 0;
+    padding-left: 30px;
+    position: relative;
+    border-bottom: 1px dashed var(--color-border-secondary);
+}
+.join-us-details ul li:last-child {
+    border-bottom: none;
+}
+.join-us-details ul li::before {
+    content: '✔';
+    color: var(--color-text-subtle);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* --- リンク集 --- */
+.links-section {
+    background-color: var(--color-background-light);
+    /* .content-section:nth-child(odd) で背景色が設定される想定 */
+    text-align: center;
+}
+.links-section .section-title {
+    margin-bottom: 30px;
+}
+.links-section a {
+    display: inline-block;
+    margin: 8px 12px;
+    color: var(--color-text-subtle);
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px 20px;
+    border: 1px solid var(--color-border-accent);
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+.links-section a:hover {
+    background-color: var(--color-background-body);
+    color: var(--color-text-primary);
+    border-color: #A8B9D1; /* 少し濃いめの境界線 (直接指定のままか、変数化検討) */
+}
+
+/* --- フッター --- */
+.site-footer {
+    padding: 40px 50px;
+    background-color: var(--color-background-footer);
+    color: var(--color-text-footer);
+    font-size: 0.9em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 35px;
+    box-shadow: none;
+}
+
+@media (min-width: 769px) {
+    .menu-toggle,
+    .mobile-nav {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .desktop-nav-container {
+        display: none;
+    }
+
+    
+
+    
+
+    .mobile-nav {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Start off-screen */
+        width: 70%; /* Adjust as needed */
+        height: 100%;
+        background-color: var(--color-background-light);
+        box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+        transition: right 0.3s ease-in-out;
+        padding-top: 80px; /* Space for header */
+        z-index: 999;
+    }
+
+    .mobile-nav.is-open {
+        right: 0; /* Slide in */
+    }
+
+    .mobile-nav ul {
+        display: block;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .mobile-nav ul li {
+        margin: 0;
+        text-align: left;
+        padding: 15px 20px;
+        border-bottom: 1px solid var(--color-border-secondary);
+    }
+
+    .mobile-nav ul li:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-nav ul li a {
+        display: block;
+        padding: 0;
+        border-bottom: none;
+        color: var(--color-text-primary);
+        font-size: 1.1em;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .menu-toggle[aria-expanded="true"] .hamburger-bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .menu-toggle[aria-expanded="true"] .hamburger-bar:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle[aria-expanded="true"] .hamburger-bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+
+footer > section h4 {
+    color: var(--color-text-footer-heading);
+    font-size: 1.1em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.footer-link {
+    display: block;
+    color: var(--color-text-footer-light);
+    text-decoration: none;
+    margin-bottom: 10px;
+    padding: 5px 0;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.footer-link:hover {
+    color: var(--color-text-footer-heading); /* 白 */
+    padding-left: 5px;
+}
+
+footer > p { /* コピーライト */
+    flex-basis: 100%;
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border-footer);
+    color: var(--color-text-footer-copyright);
+}
+
+/* --- スプラッシュオーバーレイ --- */
+.splash-overlay {
+  position: fixed;
+  z-index: 2000;
+  inset: 0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity 0.8s cubic-bezier(.4,0,.2,1);
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 24px;
+  overflow: auto;
+}
+
+@keyframes splash-fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.splash-overlay.hide {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s cubic-bezier(.4,0,.2,1);
+}
+
+.cta-button {
+  padding: clamp(6px, 2vw, 12px) clamp(12px, 4vw, 24px);
+}
+
+
+
+@media (max-width: 600px) {
+  header {
+    padding: 15px 20px; /* 左右のパディングを調整 */
+  }
+  .content-section {
+    padding: 40px 20px; /* 左右のパディングを調整 */
+  }
+  .splash-title {
+    font-size: 5.6rem;
+    max-width: 98vw;
+  }
+  .cta-button,
+  .slide-caption .cta-button.slide-cta {
+    font-size: clamp(0.8em, 2.5vw, 1em);
+    padding: 6px 12px;
+  }
+  .section-title {
+    font-size: 1.3em;
+  }
+  header h1 {
+    font-size: 1.8em;
+  }
+  .hero-section .carousel-slide img {
+    min-height: 180px;   /* 必要なら最小高さも指定 */
+  }
+  .hero-section .slide-caption {
+    padding: 24px 12px;  /* キャプションの余白を広げる */
+  }
+  .hero-section .slide-caption h3 {
+    font-size: 1.3rem;   /* タイトルを大きく */
+  }
+  .hero-section .slide-caption p {
+    font-size: 1.05rem;  /* 説明文も少し大きく */
+  }
+  .hero-section .cta-button,
+  .hero-section .slide-cta {
+    font-size: 1.1rem;   /* ボタンも大きく */
+    padding: 12px 24px;
+  }
+}
+
+.hero-section .slide-caption h3 {
+  font-size: clamp(1.1rem, 4vw, 2rem);
+}
+.hero-section .slide-caption p {
+  font-size: clamp(0.9rem, 3vw, 1.2rem);
+}
+.hero-section .cta-button,
+.hero-section .slide-cta {
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  padding: clamp(6px, 2vw, 12px) clamp(12px, 4vw, 24px);
+}
+
+.splash-title {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: bold;
+  color: #34495E;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin: 0;
+  line-height: 1.1;
+  opacity: 0;
+  animation: splash-title-fadein 1s cubic-bezier(.4,0,.2,1) 0.2s forwards;
+}
+
+@keyframes splash-title-fadein {
+  from { opacity: 0; transform: translateY(30px) scale(0.95);}
+  to   { opacity: 1; transform: translateY(0) scale(1);}
+}
+
+@keyframes hero-zoom {
+  0%   { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.hero-zoom-img {
+  animation: hero-zoom 5s forwards 1;
+  /* 既存のobject-fit, width, heightはそのまま */
+}
+
+/* アニメーション中はスクロールバー非表示（最新ブラウザのみ対応） */
+.carousel-slide:has(.hero-zoom-img[style*="animation"]) {
+  overflow: hidden !important;
+}

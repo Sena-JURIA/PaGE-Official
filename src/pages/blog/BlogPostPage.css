@@ -1,211 +1,54 @@
-/* src/pages/blog/BlogPostPage.css */
-.blog-post-page {
+.blog-post-container {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 40px auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: var(--color-background-light);
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  line-height: 1.7;
-  color: #333;
+  box-shadow: var(--shadow-medium);
 }
 
-.post-hero {
-  padding: 0; /* Remove padding to let overlay handle it */
-  text-align: center;
-  background-color: #1a202c; /* Dark fallback */
-  background-size: cover;
-  background-position: center;
-  border-radius: 8px 8px 0 0;
-  position: relative;
-  color: #fff;
-  overflow: hidden; /* Ensure overlay fits within rounded corners */
+.blog-post-header {
+  border-bottom: 1px solid var(--color-border-secondary);
+  margin-bottom: 30px;
+  padding-bottom: 20px;
 }
 
-.post-hero-overlay {
-  padding: 60px 20px;
-  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for readability */
-}
-
-.post-title {
-  font-size: 2.8rem;
+.blog-post-header h1 {
+  font-size: 2.5em;
   margin: 0 0 10px;
-  font-weight: 700;
+  color: var(--color-text-accent);
 }
 
 .post-meta {
-  font-size: 0.9rem;
-  color: #e0e0e0;
-  margin-bottom: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 16px; /* 均等な間隔 */
+  font-size: 0.9em;
+  color: var(--color-text-subtle);
 }
 
-.post-meta .post-author,
-.post-meta .post-date {
-  margin: 0;
-  display: flex; /* flex に統一 */
-  align-items: center;
-  line-height: 1; /* ベースライン差異を減らす */
-}
-
-.post-meta .post-author {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.post-author-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
-}
-
-.author-link {
+.post-meta a {
+  color: var(--color-text-subtle);
   text-decoration: none;
-  color: #e0e0e0;
-  transition: opacity .2s ease;
+  font-weight: bold;
 }
 
-.author-link:hover,
-.author-link:focus {
-  opacity: .8;
-}
-
-.post-meta .post-date::before {
-  content: '📅';
-  margin-right: 0.4em;
-  display: inline-block;
-  line-height: 1; /* 絵文字高さでのずれ補正 */
-}
-
-.post-tags .tag {
-  display: inline-block;
-  background-color: #34495E; /* var(--color-cta-background) */
-  color: #FFFFFF; /* var(--color-cta-text) */
-  padding: 5px 12px;
-  border-radius: 15px;
-  margin: 5px;
-  font-size: 0.85rem;
-  text-decoration: none;
-  transition: background-color 0.3s;
-}
-
-.post-tags .tag:hover {
-  background-color: #2C3E50; /* var(--color-cta-background-hover) */
-}
-
-.post-body {
-  padding: 30px;
-}
-
-.post-content {
-  font-size: 1.1rem;
-}
-
-.post-content h1,
-.post-content h2,
-.post-content h3 {
-  margin-top: 2em;
-  margin-bottom: 1em;
-  padding-bottom: 0.3em;
-  border-bottom: 1px solid #eee;
-}
-
-.post-content h2 {
-  font-size: 1.8rem;
-}
-
-.post-content h3 {
-  font-size: 1.5rem;
-}
-
-.post-content p {
-  margin-bottom: 1.2em;
-}
-
-.post-content a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.post-content a:hover {
+.post-meta a:hover {
   text-decoration: underline;
 }
 
-.post-content blockquote {
-  border-left: 4px solid #ccc;
-  padding-left: 1em;
-  margin-left: 0;
-  color: #666;
-  font-style: italic;
+.blog-post-content {
+  line-height: 1.8;
+  font-size: 1.1em;
 }
 
-.post-content pre {
-  background-color: #f5f5f5;
-  padding: 1em;
-  border-radius: 5px;
-  overflow-x: auto;
+.blog-post-content h2 {
+  font-size: 1.8em;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--color-border-accent);
+  padding-bottom: 5px;
 }
 
-.post-content code {
-  font-family: 'Fira Code', 'Courier New', monospace;
-}
-
-.post-not-found {
+.loading-message, .error-message {
   text-align: center;
   padding: 50px;
-  font-size: 1.2rem;
-}
-
-/* Author Profile Box */
-.author-profile-box {
-  margin-top: 40px;
-  padding: 20px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  background-color: #f9f9f9;
-}
-
-.author-avatar img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.author-details {
-  flex-grow: 1;
-}
-
-.author-name {
-  margin: 0 0 5px;
-  font-size: 1.2rem;
-}
-
-.author-bio {
-  margin: 0 0 10px;
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.author-social-link,
-.author-posts-link {
-  font-size: 0.9rem;
-  color: #007bff;
-  text-decoration: none;
-  margin-right: 15px;
-}
-
-.author-social-link:hover,
-.author-posts-link:hover {
-  text-decoration: underline;
+  font-size: 1.2em;
 }

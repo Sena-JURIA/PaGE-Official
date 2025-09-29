@@ -9,13 +9,20 @@ const BlogList: React.FC = () => {
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const { tagName, authorId } = useParams<{ tagName?: string; authorId?: string }>();
 
   useEffect(() => {
     const fetchPostsAndTags = async () => {
-      const fetchedPosts = await getPosts();
-      setAllPosts(fetchedPosts);
-      setLoading(false);
+      try {
+        const fetchedPosts = await getPosts();
+        setAllPosts(fetchedPosts);
+      } catch (err: any) {
+        console.error("Failed to fetch posts for blog list:", err);
+        setError(err.message || "記事の読み込みに失敗しました。");
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchPostsAndTags();
@@ -26,8 +33,6 @@ const BlogList: React.FC = () => {
       let posts = allPosts;
       if (tagName) {
         posts = posts.filter(p => p.tags.includes(tagName));
-      } else if (authorId) {
-        posts = posts.filter(p => p.author.id === authorId);
       }
       setFilteredPosts(posts);
     }
@@ -35,6 +40,10 @@ const BlogList: React.FC = () => {
 
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="blog-list-error">記事一覧を読み込めませんでした: {error}</div>;
   }
 
   const getTitle = () => {

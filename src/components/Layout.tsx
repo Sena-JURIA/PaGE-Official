@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
+import './Header.css'; // 認証セクションのスタイルを適用するためにインポート
 
 const Layout: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,34 +29,35 @@ const Layout: React.FC = () => {
   return (
     <>
       <header className="site-header">
-  <Link to="/"><h1>PaGE</h1></Link>
+        <Link to="/" className="logo"><h1>PaGE</h1></Link>        
+        <div className="desktop-nav-container">
+          <nav id="main-nav" className={`desktop-nav`}>
+            <ul>
+              <li><Link to="/" className={getLinkClass('/')}>ホーム</Link></li>
+              <li><Link to="/blog" className={getLinkClass('/blog')}>ブログ</Link></li>
+              <li><Link to="/qanda" className={getLinkClass('/qanda')}>Q&A</Link></li>
+            </ul>
+          </nav>
+        </div>
+        
         <button 
           className="menu-toggle" 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-expanded={isMenuOpen}
-          aria-controls="main-nav"
+          aria-controls="main-nav-mobile"
         >
           <span className="sr-only">メニューを開閉</span>
           <span className="hamburger-bar"></span>
           <span className="hamburger-bar"></span>
           <span className="hamburger-bar"></span>
         </button>
-        <nav id="main-nav" className={`desktop-nav`}>
-          <ul>
-            <li><Link to="/" className={getLinkClass('/')}>ホーム</Link></li>
-            <li><a href="/#activities">活動内容</a></li>
-            <li><Link to="/blog" className={getLinkClass('/blog')}>ブログ</Link></li>
-            <li><Link to="/qanda" className={getLinkClass('/qanda')}>Q&A</Link></li>
-            <li><a href="/#links">リンク</a></li>
-          </ul>
-        </nav>
         <nav id="main-nav-mobile" className={`mobile-nav ${isMenuOpen ? 'is-open' : ''}`}>
           <ul>
             <li><Link to="/" className={getLinkClass('/')} onClick={handleMenuLinkClick}>ホーム</Link></li>
             <li><a href="/#activities" onClick={handleMenuLinkClick}>活動内容</a></li>
+            <li><a href="/#team" onClick={handleMenuLinkClick}>運営メンバー</a></li>
             <li><Link to="/blog" className={getLinkClass('/blog')} onClick={handleMenuLinkClick}>ブログ</Link></li>
             <li><Link to="/qanda" className={getLinkClass('/qanda')} onClick={handleMenuLinkClick}>Q&A</Link></li>
-            <li><a href="/#links" onClick={handleMenuLinkClick}>リンク</a></li>
             <li><a href="#" onClick={handleMenuLinkClick}>その他</a></li>
           </ul>
         </nav>

@@ -1,0 +1,49 @@
+.auth-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.welcome-message {
+  color: #333;
+}
+
+.user-name-link {
+  font-weight: bold;
+  color: #0070f3;
+  text-decoration: none;
+  margin: 0 0.25rem;
+}
+
+.user-name-link:hover {
+  text-decoration: underline;
+}
+
+.auth-link, .logout-button {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.register-link-btn {
+  background-color: #0070f3;
+  color: #fff;
+  border-color: #0070f3;
+}
+
+.logout-button {
+  background-color: transparent;
+  color: #e53e3e;
+  border-color: #e53e3e;
+}
+
+.logout-button:hover {
+  background-color: #e53e3e;
+  color: #fff;
+}

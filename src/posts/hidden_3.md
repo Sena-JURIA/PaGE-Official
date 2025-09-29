@@ -1,6 +1,6 @@
 ---
 title: "TypeScriptの型システム入門"
-date: "2025年6月10日"
+date: "2025-06-10"
 authorId: "yes_antikiss"
 excerpt: "静的型付けのメリットとは？TypeScriptの基本的な型定義と、その活用法を学びましょう。"
 imageUrl: "https://placehold.co/400x250/0074D9/FFFFFF?text=TypeScript"

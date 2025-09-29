@@ -13,7 +13,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
       <Link to={post.link} className="blog-card-link-wrapper">
         <img src={post.imageUrl} alt={post.title} className="blog-card-img" />
         <div className="blog-card-content">
-          <p className="blog-card-date">{post.date} - <Link to={`/blog/authors/${post.author.id}`} onClick={(e) => e.stopPropagation()}>{post.author.name}</Link></p>
+          <p className="blog-card-date">{post.date} - {post.author.name}</p>
           <h3 className="blog-card-title">{post.title}</h3>
           <p className="blog-card-excerpt">{post.excerpt}</p>
           <div className="blog-card-tags">

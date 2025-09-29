@@ -1,0 +1,642 @@
+/* /src/festival-page/FestivalPage.css */
+
+/* --- 全体設定 --- */
+.festival-page {
+  background-color: #111217; /* 参考サイトの背景色 */
+  color: #e8e6e3;
+  font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  overflow-x: hidden; /* 横スクロール防止 */
+}
+
+.festival-main {
+  /* ヘッダー分の高さを確保 */
+  padding-top: 80px;
+}
+
+.festival-announcement {
+  background-color: #ffe082; /* A warm, noticeable color */
+  color: #333;
+  text-align: center;
+  padding: 20px;
+  margin: 0 auto;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-bottom: 2px solid #ffca28;
+  position: relative;
+  z-index: 5; /* ヒーローセクションより手前に表示 */
+}
+
+.festival-announcement p {
+  margin: 0;
+}
+
+.festival-section {
+  padding: 80px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.festival-section-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  margin-bottom: 60px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* --- ヘッダー --- */
+.festival-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(17, 18, 23, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+  transition: background-color 0.3s;
+}
+
+.festival-logo-link {
+  display: block;
+  height: 40px; /* ロゴの高さに合わせて調整してください */
+}
+
+.festival-logo {
+  height: 70px; /* ロゴの高さに合わせて調整してください */
+  width: auto;
+}
+
+.festival-nav ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.festival-nav a {
+  color: #c7c4c0;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.festival-nav a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+}
+
+/* --- ヒーローセクション --- */
+.festival-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden; /* アニメーション用 */
+  padding: 0;
+  margin: -80px 0 0 0; /* mainのpadding-topを相殺 */
+}
+
+.festival-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.festival-hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* スクロールに連動してズームアウトするアニメーション (Chrome/Edge) */
+  animation: hero-zoom-out linear;
+  animation-timeline: scroll(root);
+  animation-range: 0 500px;
+}
+
+@keyframes hero-zoom-out {
+  from {
+    transform: scale(1.2);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.festival-hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+  z-index: 2;
+}
+
+.festival-hero-content {
+  position: relative;
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fade-in-up 1s 0.5s forwards;
+}
+
+.festival-hero-title {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  margin: 0;
+}
+
+.festival-hero-subtitle {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  color: #e8e6e3;
+  margin-top: 1rem;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+}
+
+.festival-hero-date-time {
+  margin-top: 2rem;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  line-height: 1.5;
+}
+
+.festival-hero-date-time p {
+  margin: 0.2em 0;
+}
+
+/* --- News Section --- */
+.news-section {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+}
+
+.news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.news-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-link {
+  display: flex;
+  gap: 2rem;
+  padding: 1.5rem 1rem;
+  text-decoration: none;
+  color: #c7c4c0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.news-link:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.news-date {
+  flex-shrink: 0;
+  font-weight: bold;
+}
+
+/* --- Event Section --- */
+.event-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.event-card {
+  background-color: rgba(30, 32, 41, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.event-card--coming-soon {
+  /* 「Coming Soon」カードに適用するアニメーション */
+  animation: pulse-red-border-intense 2.5s infinite ease-in-out;
+}
+
+@keyframes pulse-red-border-intense {
+  0%, 100% {
+    border-color: rgba(255, 0, 0, 0.6);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4), 0 0 5px rgba(255, 100, 100, 0.3) inset;
+    transform: scale(1);
+  }
+  50% {
+    border-color: rgba(255, 120, 120, 1);
+    box-shadow: 0 0 35px rgba(255, 0, 0, 0.8), 0 0 12px rgba(255, 150, 150, 0.5) inset;
+    transform: scale(1.03);
+  }
+}
+
+.event-card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.event-card-content {
+  padding: 1.5rem;
+}
+
+.event-card-title {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: #fff;
+}
+
+.event-card-description {
+  color: #c7c4c0;
+  font-size: 0.95rem;
+}
+
+/* --- Access Section --- */
+.access-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.access-map iframe {
+  width: 100%;
+  height: 400px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.access-info h3 {
+  font-size: 1.8rem;
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.access-info p {
+  font-size: 1rem;
+  color: #c7c4c0;
+  line-height: 1.8;
+}
+
+.access-info h4 {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-left: 3px solid #fff;
+  padding-left: 1rem;
+}
+
+.access-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+
+.access-info li {
+  color: #c7c4c0;
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.access-info li::before {
+  content: '▶';
+  position: absolute;
+  left: 0;
+  color: #fff;
+}
+
+.access-map-link {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #fff;
+  color: #111217;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.access-map-link:hover {
+  background-color: #c7c4c0;
+}
+
+/* --- Guest Credit Section --- */
+.guest-credit-section {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.guest-credit-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.guest-credit-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.guest-credit-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.guest-credit-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.guest-credit-role {
+  font-size: 1rem;
+  color: #a09d99;
+  margin-bottom: 0.5rem;
+}
+
+.guest-credit-name-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.guest-credit-name {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+}
+
+.guest-credit-social-icon {
+  width: 22px;
+  height: 22px;
+  fill: #c7c4c0;
+  transition: fill 0.3s, transform 0.3s;
+}
+
+.guest-credit-social-icon:hover {
+  fill: #fff;
+  transform: scale(1.1);
+}
+
+/* --- Footer --- */
+.festival-footer {
+  padding: 40px 0;
+  background-color: #0c0d10;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.festival-footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.festival-social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.festival-social-links a {
+  color: #888;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.festival-social-links a:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.festival-social-links svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.festival-footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.festival-footer-link {
+  color: #c7c4c0;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.festival-footer-link:hover {
+  color: #fff;
+}
+
+.festival-copyright {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* --- 共通アニメーション --- */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes splash-fade-in {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* FadeInSection用のスタイル (main.cssにもありますが、独立性を高めるためにこちらにも定義) */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- スプラッシュスクリーン --- */
+.festival-splash-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000100; /* 少し落ち着いたグリーンバック */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 1s ease-out, visibility 1s ease-out;
+  visibility: visible;
+}
+
+.festival-splash-overlay.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none; /* アニメーション後、下の要素をクリックできるようにする */
+}
+
+.festival-splash-title {
+  font-size: clamp(3rem, 12vw, 7rem);
+  color: white;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: scale(0.9);
+  /* 登場アニメーション */
+  animation: splash-fade-in 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* メインコンテンツをスプラッシュ表示中に隠す */
+.festival-content-hidden {
+  display: none;
+}
+
+/* --- BGMコントロールボタン --- */
+.audio-control-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001; /* ヘッダーよりは手前、スプラッシュよりは奥 */
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.audio-control-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+/* --- Game Detail Page --- */
+.game-detail-section {
+  padding: 0 40px 80px;
+  max-width: 1000px;
+  margin: 0 auto;
+  color: #e8e6e3;
+}
+
+.game-detail-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .game-detail-content {
+    grid-template-columns: 1fr 1.5fr;
+  }
+}
+
+.game-detail-img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.game-detail-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.game-detail-description {
+  color: #c7c4c0;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.game-detail-description ul {
+  padding-left: 20px;
+}
+
+.game-detail-credits,
+.game-detail-note {
+  color: #a09d99;
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+}
+
+/* --- 「消えた音色と七不思議」用アニメーション --- */
+.horror-text-pulse {
+  display: inline-block; /* アニメーションが正しく適用されるように */
+  animation: pulse-red-glow 2.5s infinite;
+}
+
+@keyframes pulse-red-glow {
+  0%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #ff2a2a, 0 0 15px #ff2a2a; }
+  50% { text-shadow: 0 0 10px #fff, 0 0 20px #ff5a5a, 0 0 30px #ff5a5a; }
+}
+
+audio {
+  display: none;
+}

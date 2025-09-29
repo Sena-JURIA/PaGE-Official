@@ -11,13 +11,14 @@ marked.setOptions({
 } as any);
 
 import type { Post } from '../types/Post';
+import type { Author } from '../types/Author';
 import { authors } from './authors';
 
 interface FrontMatterAttributes {
   title: string;
   date: string;
   authorId: string;
-  imageUrl: string;
+  imageUrl?: string;
   excerpt: string;
   tags?: string[]; // tagsはオプショナル
 }
@@ -30,20 +31,48 @@ function pathToId(path: string): string {
   return path.split('/').pop()?.replace('.md', '') || '';
 }
 
+const authorCache: Record<string, Author> = {};
+
+async function getAuthorById(authorId: string): Promise<Author> {
+  if (authorCache[authorId]) {
+    return authorCache[authorId];
+  }
+
+  const author = authors[authorId];
+
+  if (!author) {
+    // 未知の著者のためのフォールバック
+    console.warn(`Author with id "${authorId}" not found. Using a default author.`);
+    const defaultAuthor: Author = {
+      id: authorId,
+      name: '不明な著者',
+      bio: '',
+      avatarUrl: '',
+    };
+    authorCache[authorId] = defaultAuthor;
+    return defaultAuthor;
+  }
+
+  authorCache[authorId] = author;
+  return author;
+}
+
 async function processPost(path: string, loader: () => Promise<string>): Promise<Post> {
   const id = pathToId(path);
   const rawContent = await loader();
   const { attributes, body } = fm<FrontMatterAttributes>(rawContent);
   const htmlContent = marked(body) as string;
-  const author = authors[attributes.authorId];
 
-  if (!author) {
-    throw new Error(`Author with id "${attributes.authorId}" not found.`);
+  if (!attributes.authorId) {
+    throw new Error(`Post with path "${path}" is missing the "authorId" attribute in its front-matter.`);
   }
+
+  const author = await getAuthorById(attributes.authorId);
 
   return {
     id,
     ...attributes,
+    imageUrl: attributes.imageUrl || '',
     author,
     tags: attributes.tags || [],
     link: `/blog/${id}`,
